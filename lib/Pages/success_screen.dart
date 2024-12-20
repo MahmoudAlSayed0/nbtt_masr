@@ -12,7 +12,7 @@ class SuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var pageHeight = MediaQuery.of(context).size.height;
     var pageWidth = MediaQuery.of(context).size.width;
- /*   Timer(
+    /*   Timer(
         Duration(seconds: 1),
             () =>
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => StartPage(),))
@@ -22,18 +22,24 @@ class SuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SvgPicture.asset("assets/images/Group 22.svg",
-            height: pageHeight*0.4,width: pageWidth,),
-          SizedBox(height: 20,),
+          SvgPicture.asset(
+            "assets/images/Group 22.svg",
+            height: pageHeight * 0.4,
+            width: pageWidth,
+          ),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('لقد تم الارسال بنجاح',style: TextStyle(
-                  color: kRedColor,
-                  fontSize: 35,
-                  fontWeight: FontWeight.w900
-              ),),
-
+              Text(
+                'لقد تم الارسال بنجاح',
+                style: TextStyle(
+                    color: kRedColor,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w900),
+              ),
             ],
           ),
           Container(
@@ -48,17 +54,33 @@ class SuccessScreen extends StatelessWidget {
                     Container(
                       width: pageWidth * 0.6,
                       height: pageHeight * 0.07,
-                      child: FlatButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => StartPage(firstTime: false,))),
+                      child: TextButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StartPage(
+                                      firstTime: false,
+                                    ))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Icon(Icons.arrow_back,color: Colors.white,size: 40,),
-                            SizedBox(width: 5,),
-                            Text("الرئيسية",style: TextStyle(color: Colors.white,fontSize: 30,
-                                fontWeight: FontWeight.bold),),
+                            Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "الرئيسية",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
-
                       ),
                       decoration: BoxDecoration(
                         gradient: kGradientColor,

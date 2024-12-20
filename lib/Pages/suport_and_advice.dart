@@ -134,7 +134,7 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
                         Transform.translate(
                           offset:
                               Offset(screenWidth * 0.04, screenHeight * 0.1),
-                          child: RaisedButton(
+                          child: ElevatedButton(
                             onPressed: () => Navigator.pop(context),
                             child: Row(
                               children: [
@@ -151,8 +151,10 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
                                 ),
                               ],
                             ),
-                            color: Colors.transparent,
-                            elevation: 0,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                            ),
                           ),
                         ),
                       ],
@@ -235,41 +237,41 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
           ),
         ),
       ),
-      body:  SingleChildScrollView(
-              /*controller: _scrollController,*/
-              child: Column(
+      body: SingleChildScrollView(
+        /*controller: _scrollController,*/
+        child: Column(
+          children: [
+            LogoRow(screenHeight: screenHeight),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'الدعم والمشورة',
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: screenHeight * 0.01, bottom: screenHeight * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  LogoRow(screenHeight: screenHeight),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'الدعم والمشورة',
-                        style: TextStyle(
-                          color: kTextColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: screenHeight * 0.01, bottom: screenHeight * 0.02),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'جميع البيانات المقدمة من خلال الاستمارة تحظى بالسرية التامة',
-                          style: TextStyle(
-                            color: kTextColor,
-                            fontSize: screenWidth * 0.04,
-                          ),
-                        )
-                      ],
+                  Text(
+                    'جميع البيانات المقدمة من خلال الاستمارة تحظى بالسرية التامة',
+                    style: TextStyle(
+                      color: kTextColor,
+                      fontSize: screenWidth * 0.04,
                     ),
-                  ),
-                  /*   Row(
+                  )
+                ],
+              ),
+            ),
+            /*   Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RaisedButton(
@@ -289,527 +291,509 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
                         curve: Curves.fastOutSlowIn);
                   },),
               ],),*/
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  right: screenWidth * 0.08,
-                                  left: screenWidth * 0.08,
-                                  top: screenWidth * 0.02,
-                                  bottom: screenHeight * 0.02),
-                              child: Text(
-                                'بيانات طالب الدعم',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  color: kRedColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ),
-                          ],
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: screenWidth * 0.08,
+                            left: screenWidth * 0.08,
+                            top: screenWidth * 0.02,
+                            bottom: screenHeight * 0.02),
+                        child: Text(
+                          'بيانات طالب الدعم',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: kRedColor,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: TextFormField(
-                              controller: _nameController,
-                              maxLines: 1,
-                              style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                labelText: "الاسم",
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                              ),
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'من فضلك ادخل اسم طالب الدعم';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              /*onChanged: (value) {
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        controller: _nameController,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 20),
+                        decoration: InputDecoration(
+                          labelText: "الاسم",
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                        ),
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'من فضلك ادخل اسم طالب الدعم';
+                          } else {
+                            return null;
+                          }
+                        },
+                        /*onChanged: (value) {
                           if(value.isNotEmpty)
                             _formKey.currentState.validate();
                         },*/
-                              //keyboardType: TextInputType.number,
-                              onFieldSubmitted: (value) {
-                                FocusScope.of(context)
-                                    .requestFocus(pin2FocusNode);
-                              },
-                            ),
-                          ),
+                        //keyboardType: TextInputType.number,
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context).requestFocus(pin2FocusNode);
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        controller: _mobileController,
+                        maxLines: 1,
+                        focusNode: pin2FocusNode,
+                        maxLength: 11,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                        ],
+                        style: TextStyle(fontSize: 20),
+                        decoration: InputDecoration(
+                          labelText: "التليفون",
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: TextFormField(
-                              controller: _mobileController,
-                              maxLines: 1,
-                              focusNode: pin2FocusNode,
-                              maxLength: 11,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp("[0-9]"))
-                              ],
-                              style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                labelText: "التليفون",
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                    BorderSide(color: kBorderColor)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                    BorderSide(color: kBorderColor)),
-                              ),
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'من فضلك ادخل رقم تليفون ';
-                                } else if (value.length != 11) {
-                                  return 'من فضلك ادخل رقم تليفون صحيح';
-                                } /*else if (mobileValidatorRegExp.hasMatch(value)){
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'من فضلك ادخل رقم تليفون ';
+                          } else if (value.length != 11) {
+                            return 'من فضلك ادخل رقم تليفون صحيح';
+                          } /*else if (mobileValidatorRegExp.hasMatch(value)){
                          return 'من فضلك ادخل رقم تليفون صحيح';
                        }*/
-                                else {
-                                  return null;
-                                }
-                              },
-                              /* onChanged: (value) {
+                          else {
+                            return null;
+                          }
+                        },
+                        /* onChanged: (value) {
                           if(value.isNotEmpty)
                             _formKey.currentState.validate();
                         },*/
-                              keyboardType: TextInputType.number,
-                              onFieldSubmitted: (value) {
-                                FocusScope.of(context)
-                                    .requestFocus(pin3FocusNode);
-                              },
-                            ),
-                          ),
+                        keyboardType: TextInputType.number,
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context).requestFocus(pin3FocusNode);
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        controller: _addressController,
+                        maxLines: 1,
+                        focusNode: pin3FocusNode,
+                        style: TextStyle(fontSize: 20),
+                        decoration: InputDecoration(
+                          labelText: "العنوان",
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: TextFormField(
-                              controller: _addressController,
-                              maxLines: 1,
-                              focusNode: pin3FocusNode,
-                              style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                labelText: "العنوان",
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                              ),
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'من فضلك ادخل عنوان طالب الدعم';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              /* onChanged: (value) {
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'من فضلك ادخل عنوان طالب الدعم';
+                          } else {
+                            return null;
+                          }
+                        },
+                        /* onChanged: (value) {
                           if(value.isNotEmpty)
                             _formKey.currentState.validate();
                         },*/
 
-                              //keyboardType: TextInputType.number,
-                            ),
+                        //keyboardType: TextInputType.number,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: screenWidth * 0.08,
+                            left: screenWidth * 0.08,
+                            top: screenWidth * 0.02),
+                        child: Text(
+                          'بيانات الدعم والمشورة',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: kRedColor,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  right: screenWidth * 0.08,
-                                  left: screenWidth * 0.08,
-                                  top: screenWidth * 0.02),
-                              child: Text(
-                                'بيانات الدعم والمشورة',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  color: kRedColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  right: screenWidth * 0.1,
-                                  left: screenWidth * 0.08,
-                                  top: screenWidth * 0.02),
-                              child: Text(
-                                'المستفيد من الخدمات المطلوبة',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: kTextColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Radio(
-                                activeColor: kGreenColor,
-                                value: SupportForHow.Kid,
-                                groupValue: _supportForHow,
-                                onChanged: (SupportForHow? value) {
-                                  setState(() {
-                                    _supportForHow = value!;
-                                    typeValue = 'الطفل';
-                                    kidVisible = true;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'الطفل',
-                                style:
-                                    TextStyle(fontSize: 20, color: kTextColor),
-                              ),
-                              Radio(
-                                value: SupportForHow.Mother,
-                                activeColor: kGreenColor,
-                                groupValue: _supportForHow,
-                                onChanged: (SupportForHow? value) {
-                                  setState(() {
-                                    _supportForHow = value!;
-                                    typeValue = 'الام';
-                                    kidVisible = false;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'الام',
-                                style:
-                                TextStyle(fontSize: 20, color: kTextColor),
-                              ),
-                            ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: screenWidth * 0.1,
+                            left: screenWidth * 0.08,
+                            top: screenWidth * 0.02),
+                        child: Text(
+                          'المستفيد من الخدمات المطلوبة',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: kTextColor,
                           ),
                         ),
-                        Visibility(
-                          visible: kidVisible,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02,
-                            ),
-                            child: Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: TextFormField(
-                                controller: _kidName,
-                                maxLines: 1,
-                                style: TextStyle(fontSize: 20),
-                                decoration: InputDecoration(
-                                  labelText: "اسم الطفل",
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                      BorderSide(color: kBorderColor)),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: kRedColor.withOpacity(0.5))),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                      BorderSide(color: kBorderColor)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: kRedColor.withOpacity(0.5))),
-                                ),
-                                textDirection: TextDirection.rtl,
-                                textAlign: TextAlign.right,
-                                //keyboardType: TextInputType.number,
-                                validator: kidVisible ? (value) {
-                            if(value!.isEmpty){
-                              return 'من فضلك ادخل اسم الطفل';
-                            }else{
-                              return null;
-                            }
-                          } : null,
-                          onChanged: (value) {
-                            if(value.isNotEmpty)
-                              _formKey.currentState!.validate();
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Radio(
+                          activeColor: kGreenColor,
+                          value: SupportForHow.Kid,
+                          groupValue: _supportForHow,
+                          onChanged: (SupportForHow? value) {
+                            setState(() {
+                              _supportForHow = value!;
+                              typeValue = 'الطفل';
+                              kidVisible = true;
+                            });
                           },
-                              ),
-                            ),
-                          ),
                         ),
-                        Visibility(
-                          visible: kidVisible,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02,
-                            ),
-                            child: Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: TextFormField(
-                                controller: _kidAge,
-                                maxLines: 1,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp("[0-9]"))
-                                ],
-                                style: TextStyle(fontSize: 20),
-                                decoration: InputDecoration(
-                                  labelText: "عمر الطفل",
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                      BorderSide(color: kBorderColor)),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: kRedColor.withOpacity(0.5))),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                      BorderSide(color: kBorderColor)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: kRedColor.withOpacity(0.5))),
-                                ),
-                                textDirection: TextDirection.rtl,
-                                textAlign: TextAlign.right,
-                                keyboardType: TextInputType.number,
-                                validator: kidVisible ? (value) {
-                            if(value!.isEmpty){
-                              return 'من فضلك ادخل عمر الطفل';
-                            } else if(int.parse(value) > 18){
-                              return 'يجب سن الطفل لا يتعدى ال ١٨ سنة';
-                            }else{
-                              return null;
-                            }
-                          } : null,
-                          onChanged: (value) {
-                            if(value.isNotEmpty)
-                              _formKey.currentState!.validate();
+                        Text(
+                          'الطفل',
+                          style: TextStyle(fontSize: 20, color: kTextColor),
+                        ),
+                        Radio(
+                          value: SupportForHow.Mother,
+                          activeColor: kGreenColor,
+                          groupValue: _supportForHow,
+                          onChanged: (SupportForHow? value) {
+                            setState(() {
+                              _supportForHow = value!;
+                              typeValue = 'الام';
+                              kidVisible = false;
+                            });
                           },
-                              ),
-                            ),
-                          ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: TextFormField(
-                              controller: _briefDescription,
-                              maxLines: 2,
-                              maxLength: 250,
-                              focusNode: pin4FocusNode,
-                              style: TextStyle(fontSize: 20),
-                              decoration: InputDecoration(
-                                labelText:
-                                    "توصيف مختصر للدعم والمشورة المطلوبة",
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                        color: kRedColor.withOpacity(0.5))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        BorderSide(color: kBorderColor)),
-                              ),
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'من فضلك ادخل توصيف مختصر للدعم والمشورة المطلوبة';
-                                } else {
-                                  return null;
+                        Text(
+                          'الام',
+                          style: TextStyle(fontSize: 20, color: kTextColor),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Visibility(
+                    visible: kidVisible,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02,
+                      ),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          controller: _kidName,
+                          maxLines: 1,
+                          style: TextStyle(fontSize: 20),
+                          decoration: InputDecoration(
+                            labelText: "اسم الطفل",
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: kRedColor.withOpacity(0.5))),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: kRedColor.withOpacity(0.5))),
+                          ),
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          //keyboardType: TextInputType.number,
+                          validator: kidVisible
+                              ? (value) {
+                                  if (value!.isEmpty) {
+                                    return 'من فضلك ادخل اسم الطفل';
+                                  } else {
+                                    return null;
+                                  }
                                 }
-                              },
-                              /* onChanged: (value) {
+                              : null,
+                          onChanged: (value) {
+                            if (value.isNotEmpty)
+                              _formKey.currentState!.validate();
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: kidVisible,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02,
+                      ),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          controller: _kidAge,
+                          maxLines: 1,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                          ],
+                          style: TextStyle(fontSize: 20),
+                          decoration: InputDecoration(
+                            labelText: "عمر الطفل",
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: kRedColor.withOpacity(0.5))),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: kRedColor.withOpacity(0.5))),
+                          ),
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          keyboardType: TextInputType.number,
+                          validator: kidVisible
+                              ? (value) {
+                                  if (value!.isEmpty) {
+                                    return 'من فضلك ادخل عمر الطفل';
+                                  } else if (int.parse(value) > 18) {
+                                    return 'يجب سن الطفل لا يتعدى ال ١٨ سنة';
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                              : null,
+                          onChanged: (value) {
+                            if (value.isNotEmpty)
+                              _formKey.currentState!.validate();
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        controller: _briefDescription,
+                        maxLines: 2,
+                        maxLength: 250,
+                        focusNode: pin4FocusNode,
+                        style: TextStyle(fontSize: 20),
+                        decoration: InputDecoration(
+                          labelText: "توصيف مختصر للدعم والمشورة المطلوبة",
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  color: kRedColor.withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: kBorderColor)),
+                        ),
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'من فضلك ادخل توصيف مختصر للدعم والمشورة المطلوبة';
+                          } else {
+                            return null;
+                          }
+                        },
+                        /* onChanged: (value) {
                           if(value.isNotEmpty)
                             _formKey.currentState.validate();
                         },*/
-                              //keyboardType: TextInputType.number,
-                            ),
+                        //keyboardType: TextInputType.number,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: screenWidth * 0.1,
+                            left: screenWidth * 0.08,
+                            top: screenWidth * 0.02),
+                        child: Text(
+                          'هل تم التواصل سابقا مع المجلس',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: kTextColor,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  right: screenWidth * 0.1,
-                                  left: screenWidth * 0.08,
-                                  top: screenWidth * 0.02),
-                              child: Text(
-                                'هل تم التواصل سابقا مع المجلس',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: kTextColor,
-                                ),
-                              ),
-                            ),
-                          ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Radio(
+                          activeColor: kGreenColor,
+                          value: IsContactBefore.Yes,
+                          groupValue: _character,
+                          onChanged: (IsContactBefore? value) {
+                            setState(() {
+                              _character = value!;
+                              _visible = true;
+                              pcValue = 1;
+                            });
+                          },
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Radio(
-                                activeColor: kGreenColor,
-                                value: IsContactBefore.Yes,
-                                groupValue: _character,
-                                onChanged: (IsContactBefore? value) {
-                                  setState(() {
-                                    _character = value!;
-                                    _visible = true;
-                                    pcValue = 1;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'نعم',
-                                style: new TextStyle(fontSize: 20.0),
-                              ),
-                              Radio(
-                                value: IsContactBefore.No,
-                                activeColor: kGreenColor,
-                                groupValue: _character,
-                                onChanged: (IsContactBefore? value) {
-                                  setState(() {
-                                    _character = value!;
-                                    _visible = false;
-                                    pcValue = 2;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'لا',
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                            ],
+                        Text(
+                          'نعم',
+                          style: new TextStyle(fontSize: 20.0),
+                        ),
+                        Radio(
+                          value: IsContactBefore.No,
+                          activeColor: kGreenColor,
+                          groupValue: _character,
+                          onChanged: (IsContactBefore? value) {
+                            setState(() {
+                              _character = value!;
+                              _visible = false;
+                              pcValue = 2;
+                            });
+                          },
+                        ),
+                        Text(
+                          'لا',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Visibility(
+                    visible: _visible,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: screenWidth * 0.08,
+                        left: screenWidth * 0.08,
+                        top: screenWidth * 0.02,
+                      ),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          controller: _fileNo,
+                          maxLines: 1,
+                          style: TextStyle(fontSize: 20),
+                          decoration: InputDecoration(
+                            labelText: "رقم الملف",
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: kRedColor.withOpacity(0.5))),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: kBorderColor)),
                           ),
-                        ),
-                        Visibility(
-                          visible: _visible,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              right: screenWidth * 0.08,
-                              left: screenWidth * 0.08,
-                              top: screenWidth * 0.02,
-                            ),
-                            child: Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: TextFormField(
-                                controller: _fileNo,
-                                maxLines: 1,
-                                style: TextStyle(fontSize: 20),
-                                decoration: InputDecoration(
-                                  labelText: "رقم الملف",
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          BorderSide(color: kBorderColor)),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: kRedColor.withOpacity(0.5))),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          BorderSide(color: kBorderColor)),
-                                ),
-                                textDirection: TextDirection.rtl,
-                                textAlign: TextAlign.right,
-                                keyboardType: TextInputType.number,
-                                /*validator: pcValue == 1 ? (value) {
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          keyboardType: TextInputType.number,
+                          /*validator: pcValue == 1 ? (value) {
                             if(value.isEmpty){
                               return 'من فضلك ادخل رقم الملف';
                             }else{
@@ -820,39 +804,43 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
                             if(value.isNotEmpty)
                               _formKey.currentState.validate();
                           },*/
-                              ),
-                            ),
-                          ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: screenHeight * 0.05,
-                              bottom: screenHeight * 0.05),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: screenWidth * 0.55,
-                                height: screenHeight * 0.07,
-                                child: FlatButton(
-                                  onPressed: () async {
-                                    if(_formKey.currentState!.validate()){
-                                      final model = SupportModel(
-                                          name: _nameController.text,
-                                          address: _addressController.text,
-                                          phoneNumber: _mobileController.text,
-                                          type: typeValue,
-                                          kidName: _kidName.text,
-                                          kidAge: _kidAge.text,
-                                          pc: pcValue,
-                                          description: _briefDescription.text,
-                                          fileNo: _fileNo.text
-                                      );
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => AdviceConfirmationPage(model: model,),));
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: screenHeight * 0.05, bottom: screenHeight * 0.05),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: screenWidth * 0.55,
+                          height: screenHeight * 0.07,
+                          child: TextButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final model = SupportModel(
+                                    name: _nameController.text,
+                                    address: _addressController.text,
+                                    phoneNumber: _mobileController.text,
+                                    type: typeValue,
+                                    kidName: _kidName.text,
+                                    kidAge: _kidAge.text,
+                                    pc: pcValue,
+                                    description: _briefDescription.text,
+                                    fileNo: _fileNo.text);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AdviceConfirmationPage(
+                                        model: model,
+                                      ),
+                                    ));
+                              }
 
-                                    }
-
-                                    /*if(_formKey.currentState.validate()){
+                              /*if(_formKey.currentState.validate()){
                               try{
                                 final model =SupportModel(
                                     name: _nameController.text,
@@ -953,44 +941,43 @@ class _SupportAndAdvicePageState extends State<SupportAndAdvicePage> {
                               }
 
                             }*/
-                                  },
-                                  //=> Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessScreen())),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_back,
-                                        color: Colors.white,
-                                        size: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "ارسال",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
+                            },
+                            //=> Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessScreen())),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                  size: 30,
                                 ),
-                                decoration: BoxDecoration(
-                                  gradient: kGradientColor,
-                                  borderRadius: BorderRadius.circular(25),
+                                SizedBox(
+                                  width: 5,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "ارسال",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: kGradientColor,
+                            borderRadius: BorderRadius.circular(25),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
-            ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

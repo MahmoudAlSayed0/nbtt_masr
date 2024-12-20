@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:nbtt_masr/Pages/onBoarding.dart';
 import 'package:nbtt_masr/Pages/start_page.dart';
 import 'package:nbtt_masr/helpers/constants.dart';
 import 'package:nbtt_masr/models/BoardingModel.dart';
 import 'package:nbtt_masr/service/sqlite_service/dbhelper.dart';
-
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -30,16 +28,17 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     helper = DBHelper();
     //_initStateAsync();
-     dbInstallation();
+    dbInstallation();
   }
-  void dbInstallation() async{
+
+  void dbInstallation() async {
     List<BoardingModel> localBoardingList = await helper.allBoardingValue();
     print(localBoardingList.length);
-    if(localBoardingList.length == 0){
+    if (localBoardingList.length == 0) {
       setState(() {
         isFirst = true;
       });
-    }else{
+    } else {
       setState(() {
         isFirst = false;
       });
@@ -123,18 +122,18 @@ class _SplashScreenState extends State<SplashScreen> {
                       Container(
                         width: screenWidth * 0.6,
                         height: screenHeight * 0.07,
-                        child: FlatButton(
+                        child: TextButton(
                           onPressed: () {
                             if (isFirst) {
-
-                              helper.createBoardingValue(BoardingModel(name: "First"));
+                              helper.createBoardingValue(
+                                  BoardingModel(name: "First"));
 
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => OnBoardingPage()));
                             } else {
-                             Navigator.push(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => StartPage(

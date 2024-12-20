@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -22,133 +21,150 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-   //final bool firstTime = true;
+  //final bool firstTime = true;
   late DBHelper helper;
   late Future<void> _initForm;
   List<DailyTipsModel> dailyTipsList = <DailyTipsModel>[];
   List<DailyTipsModel> dailyTipsByPeriodList = <DailyTipsModel>[];
 
   Future<void> _initStateAsync() async {
-
     dailyTipsList.addAll(await helper.allTipOfDay());
-    for(int i=0; i < dailyTipsList.length; i++){
-      var check = await isCurrentDateInRange(DateTime.parse(dailyTipsList[i].from),DateTime.parse(dailyTipsList[i].to));
-      if(check){
+    for (int i = 0; i < dailyTipsList.length; i++) {
+      var check = await isCurrentDateInRange(
+          DateTime.parse(dailyTipsList[i].from),
+          DateTime.parse(dailyTipsList[i].to));
+      if (check) {
         dailyTipsByPeriodList.add(dailyTipsList[i]);
         //print('true12222');
-      }else{
+      } else {
         dailyTipsByPeriodList.add(dailyTipsList.last);
         //print('false');
       }
     }
   }
-  Future<bool> isCurrentDateInRange(DateTime startDate, DateTime endDate) async{
+
+  Future<bool> isCurrentDateInRange(
+      DateTime startDate, DateTime endDate) async {
     final currentDate = DateTime.now();
-    return await currentDate.isAfter(startDate) && currentDate.isBefore(endDate);
+    return await currentDate.isAfter(startDate) &&
+        currentDate.isBefore(endDate);
   }
+
   @override
   void initState() {
     super.initState();
     helper = new DBHelper();
-    _initForm =  _initStateAsync();
-    if(widget.firstTime == true) {
-      WidgetsBinding.instance.addPostFrameCallback((_) async{
+    _initForm = _initStateAsync();
+    if (widget.firstTime == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         await Future.delayed(Duration(milliseconds: 200));
         setState(() {
-           createAlertDialog(context);
+          createAlertDialog(context);
         });
-
       });
     }
     //checkTipOfDay();
   }
-   createAlertDialog(BuildContext context) async{
-     double screenHeight = MediaQuery.of(context).size.height;
-     double screenWidth = MediaQuery.of(context).size.width;
 
-     return showDialog(context: context,builder: (context) {
-      return FutureBuilder(
-        future: _initForm,
-        builder: (context, snapshot){
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting: return WillPopScope(
-              onWillPop: () async => false,
-              child: Center(
-                child: Card(
-                  child: Container(
-                    width: screenWidth * 0.2,
-                    height: screenWidth * 0.2,
-                    padding: EdgeInsets.all(12.0),
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              ),
-            );
-            default:
-              if (snapshot.hasError)
-                return Text('Error: ${snapshot.error}');
-              else{
-                var temp = base64Decode(dailyTipsByPeriodList[0].tipImage);
-                return AlertDialog(
-                  shape: RoundedRectangleBorder(borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
-                  content: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(icon: Icon(Icons.close,size: 40,),
-                              onPressed: () => Navigator.of(context).pop(),),
-                          ],
+  createAlertDialog(BuildContext context) async {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return FutureBuilder(
+            future: _initForm,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return WillPopScope(
+                    onWillPop: () async => false,
+                    child: Center(
+                      child: Card(
+                        child: Container(
+                          width: screenWidth * 0.2,
+                          height: screenWidth * 0.2,
+                          padding: EdgeInsets.all(12.0),
+                          child: CircularProgressIndicator(),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('معلومة اليوم',style: TextStyle(
-                                fontSize: 30,
-                                color: kRedColor,
-                                fontWeight: FontWeight.bold
-                            ),)
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.01,),
-                        /* SvgPicture.network(dailyTipsList[r].tipImage.replaceAll(r"\", "/"),
-                          height: screenHeight * 0.2,),*/
-                        SvgPicture.memory(temp,
-                          height: screenHeight * 0.2,),
-                        SizedBox(
-                          height: screenHeight * 0.04,
-                        ),
-                        Center(
-                          child: Text(dailyTipsByPeriodList[0].tip,
-                            style: TextStyle(
-                                color: kTextColor,
-                                fontSize: 18,
-                                height: 1.5
-                            ),
-                            textDirection: TextDirection.rtl,
-                            textAlign: TextAlign.center,
-                            //overflow: TextOverflow.ellipsis,
-                            //maxLines: 10,
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.01,),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-
+                  );
+                default:
+                  if (snapshot.hasError)
+                    return Text('Error: ${snapshot.error}');
+                  else {
+                    var temp = base64Decode(dailyTipsByPeriodList[0].tipImage);
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.close,
+                                    size: 40,
+                                  ),
+                                  onPressed: () => Navigator.of(context).pop(),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'معلومة اليوم',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: kRedColor,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.01,
+                            ),
+                            /* SvgPicture.network(dailyTipsList[r].tipImage.replaceAll(r"\", "/"),
+                          height: screenHeight * 0.2,),*/
+                            SvgPicture.memory(
+                              temp,
+                              height: screenHeight * 0.2,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.04,
+                            ),
+                            Center(
+                              child: Text(
+                                dailyTipsByPeriodList[0].tip,
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 18,
+                                    height: 1.5),
+                                textDirection: TextDirection.rtl,
+                                textAlign: TextAlign.center,
+                                //overflow: TextOverflow.ellipsis,
+                                //maxLines: 10,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.01,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
               }
-          }
-        }
-      );
-    }
-    ,);
+            });
+      },
+    );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -157,27 +173,27 @@ class _StartPageState extends State<StartPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: customBottomNavBar(screenHeight: screenHeight, screenWidth: screenWidth),
+      bottomNavigationBar: customBottomNavBar(
+          screenHeight: screenHeight, screenWidth: screenWidth),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Scroll Group 1.png"),
-                  fit: BoxFit.cover,
-                  //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.05), BlendMode.darken),
-              )
-          ),
+            image: AssetImage("assets/images/Scroll Group 1.png"),
+            fit: BoxFit.cover,
+            //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.05), BlendMode.darken),
+          )),
           child: Column(
-           // mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: screenHeight*0.08),
+                padding: EdgeInsets.only(top: screenHeight * 0.08),
                 child: LogoRow(screenHeight: screenHeight),
               ),
               //FlatButton(onPressed: () =>  createAlertDialog(context), child: Text('')),
               Container(
-                height: screenHeight*0.7,
+                height: screenHeight * 0.7,
                 child: GridView.count(
                   crossAxisCount: 2,
                   shrinkWrap: true,
@@ -186,35 +202,51 @@ class _StartPageState extends State<StartPage> {
                     Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: screenWidth*0.1,bottom: screenHeight *0.02),
+                          padding: EdgeInsets.only(
+                              left: screenWidth * 0.1,
+                              bottom: screenHeight * 0.01),
                           child: Container(
-                            height: screenHeight * 0.3,
+                            height: screenHeight * 0.4,
                             width: screenWidth * 0.35,
-                           // margin: EdgeInsets.only(bottom: screenHeight *0.05),
+                            // margin: EdgeInsets.only(bottom: screenHeight *0.05),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.transparent,
                             ),
                             child: InkWell(
-                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SupportAndAdvicePage(),)),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        SupportAndAdvicePage(),
+                                  )),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset("assets/images/Group 8674.svg",
-                                          height: screenHeight*0.18,width: screenWidth * 0.35),
-                                 /*     Image.asset("assets/images/Component 11 – 1.png",
+                                      SvgPicture.asset(
+                                          "assets/images/Group 8674.svg",
+                                          height: screenHeight * 0.18,
+                                          width: screenWidth * 0.35),
+                                      /*     Image.asset("assets/images/Component 11 – 1.png",
                                         height: screenHeight*0.2,width: screenWidth * 0.35,),*/
                                     ],
                                   ),
-                                  SizedBox(height: screenHeight * 0.004,),
+                                  SizedBox(
+                                    height: screenHeight * 0.002,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("الدعم والمشورة",style: TextStyle(fontSize: screenWidth * 0.047,
-                                          color: kTextColor,fontWeight: FontWeight.bold),)
+                                      Text(
+                                        "الدعم والمشورة",
+                                        style: TextStyle(
+                                            fontSize: screenWidth * 0.03,
+                                            color: kTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -227,38 +259,53 @@ class _StartPageState extends State<StartPage> {
                     Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: screenWidth*0.1,bottom: screenHeight *0.02),
+                          padding: EdgeInsets.only(
+                              left: screenWidth * 0.1,
+                              bottom: screenHeight * 0.01),
                           child: Container(
-                            height: screenHeight * 0.3,
+                            height: screenHeight * 0.4,
                             width: screenWidth * 0.35,
-                           // margin: EdgeInsets.only(bottom: screenHeight *0.05),
+                            // margin: EdgeInsets.only(bottom: screenHeight *0.05),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.transparent,
                             ),
                             child: InkWell(
-                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ReportViolationPage(),)),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ReportViolationPage(),
+                                  )),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset("assets/images/Group 8675.svg",
-                                          height: screenHeight*0.18,width: screenWidth * 0.35),
-                                   /*   Image.asset("assets/images/Component 12 – 1.png",
+                                      SvgPicture.asset(
+                                          "assets/images/Group 8675.svg",
+                                          height: screenHeight * 0.18,
+                                          width: screenWidth * 0.35),
+                                      /*   Image.asset("assets/images/Component 12 – 1.png",
                                         height: screenHeight*0.2,width: screenWidth * 0.35,),*/
                                     ],
                                   ),
-                                  SizedBox(height: screenHeight * 0.004,),
+                                  SizedBox(
+                                    height: screenHeight * 0.002,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("طفل في خطر",style: TextStyle(fontSize: screenWidth * 0.047,
-                                          color: kTextColor,fontWeight: FontWeight.bold),)
+                                      Text(
+                                        "طفل في خطر",
+                                        style: TextStyle(
+                                            fontSize: screenWidth * 0.03,
+                                            color: kTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )
                                     ],
                                   ),
-                                 /* Row(
+                                  /* Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
@@ -280,35 +327,50 @@ class _StartPageState extends State<StartPage> {
                     Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: screenWidth*0.1,bottom: screenHeight *0.02),
+                          padding: EdgeInsets.only(
+                              left: screenWidth * 0.1,
+                              bottom: screenHeight * 0.01),
                           child: Container(
-                            height: screenHeight * 0.3,
+                            height: screenHeight * 0.4,
                             width: screenWidth * 0.35,
-                           // margin: EdgeInsets.only(bottom: screenHeight *0.05),
+                            // margin: EdgeInsets.only(bottom: screenHeight *0.05),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.transparent,
                             ),
                             child: InkWell(
-                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FoundedKidPage(),)),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FoundedKidPage(),
+                                  )),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset("assets/images/Group 8676.svg",
-                                          height: screenHeight*0.18,width: screenWidth * 0.35),
-                                     /* Image.asset("assets/images/Component 10 – 1.png",
+                                      SvgPicture.asset(
+                                          "assets/images/Group 8676.svg",
+                                          height: screenHeight * 0.18,
+                                          width: screenWidth * 0.35),
+                                      /* Image.asset("assets/images/Component 10 – 1.png",
                                         height: screenHeight*0.2,width: screenWidth * 0.35,),*/
                                     ],
                                   ),
-                                  SizedBox(height: screenHeight * 0.004,),
+                                  SizedBox(
+                                    height: screenHeight * 0.002,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("العثور على طفل",style: TextStyle(fontSize: screenWidth * 0.047,
-                                          color: kTextColor,fontWeight: FontWeight.bold),)
+                                      Text(
+                                        "العثور على طفل",
+                                        style: TextStyle(
+                                            fontSize: screenWidth * 0.03,
+                                            color: kTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -321,9 +383,11 @@ class _StartPageState extends State<StartPage> {
                     Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: screenWidth*0.1,bottom: screenHeight *0.02),
+                          padding: EdgeInsets.only(
+                              left: screenWidth * 0.1,
+                              bottom: screenHeight * 0.01),
                           child: Container(
-                            height: screenHeight * 0.3,
+                            height: screenHeight * 0.4,
                             width: screenWidth * 0.35,
                             //margin: EdgeInsets.only(bottom: screenHeight *0.05),
                             decoration: BoxDecoration(
@@ -332,7 +396,11 @@ class _StartPageState extends State<StartPage> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => WizardForm(),));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => WizardForm(),
+                                    ));
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -340,18 +408,27 @@ class _StartPageState extends State<StartPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset("assets/images/Group 8677.svg",
-                                          height: screenHeight*0.18,width: screenWidth * 0.35),
-                                     /* Image.asset("assets/images/Component 13 – 1.png",
+                                      SvgPicture.asset(
+                                          "assets/images/Group 8677.svg",
+                                          height: screenHeight * 0.18,
+                                          width: screenWidth * 0.35),
+                                      /* Image.asset("assets/images/Component 13 – 1.png",
                                         height: screenHeight*0.2,width: screenWidth * 0.35,),*/
                                     ],
                                   ),
-                                  SizedBox(height: screenHeight * 0.004,),
+                                  SizedBox(
+                                    height: screenHeight * 0.002,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("طفل مفقود",style: TextStyle(fontSize: screenWidth * 0.047,
-                                          color: kTextColor,fontWeight: FontWeight.bold),)
+                                      Text(
+                                        "طفل مفقود",
+                                        style: TextStyle(
+                                            fontSize: screenWidth * 0.03,
+                                            color: kTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -361,7 +438,6 @@ class _StartPageState extends State<StartPage> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -372,7 +448,3 @@ class _StartPageState extends State<StartPage> {
     );
   }
 }
-
-
-
-

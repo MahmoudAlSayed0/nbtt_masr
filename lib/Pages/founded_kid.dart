@@ -23,40 +23,42 @@ import 'package:nbtt_masr/service/sqlite_service/dbhelper.dart';
 import 'components/logoRow.dart';
 import 'components/mainDrawer.dart';
 
-
-
 String? message;
+
 class WizardFormBloc extends FormBloc<String, String> {
   final reporterName = TextFieldBloc();
-  Future<String?> validateReporterName(String reporterName) async{
+  Future<String?> validateReporterName(String reporterName) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (reporterName.isEmpty) {
       return 'من فضلك ادخل اسم المبلغ';
     }
     return null;
   }
+
   final nationalId = TextFieldBloc();
-  Future<String?> validateNationalId(String nationalId) async{
+  Future<String?> validateNationalId(String nationalId) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (nationalId.isEmpty) {
       return 'من فضلك ادخل الرقم قومي';
-    }else if(nationalId.length != 14){
+    } else if (nationalId.length != 14) {
       return 'من فضلك ادخل رقم قومي صحيح';
     }
     return null;
   }
-  final mobile =TextFieldBloc();
-  Future<String?> validateMobile(String mobile) async{
+
+  final mobile = TextFieldBloc();
+  Future<String?> validateMobile(String mobile) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (mobile.isEmpty) {
       return 'من فضلك ادخل رقم تليفون ';
-    }else if(mobile.length != 11){
+    } else if (mobile.length != 11) {
       return 'من فضلك ادخل رقم تليفون صحيح';
     }
     return null;
   }
-  final address =TextFieldBloc();
- /* Future<String> validateAddress(String address) async{
+
+  final address = TextFieldBloc();
+  /* Future<String> validateAddress(String address) async{
     await Future.delayed(Duration(milliseconds: 200));
     if (address.isEmpty) {
       return 'من فضلك ادخل عنوان المبلغ';
@@ -71,13 +73,14 @@ class WizardFormBloc extends FormBloc<String, String> {
   bool validateDistrict = false;
 
   final kidName = TextFieldBloc();
-  Future<String?> validateKidName(String kidName) async{
+  Future<String?> validateKidName(String kidName) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (kidName.isEmpty) {
       return 'من فضلك ادخل اسم الطفل';
     }
     return null;
   }
+
   /*final kidNameSource= SelectFieldBloc(
     items: ["الطفل نفسه و يؤكد انه اسمه الحقيقى","الطفل نفسه و لكن غير اكيد صحته",
     "اسم شهرة ولا يعرف اسمه الحقيقى"],
@@ -85,7 +88,8 @@ class WizardFormBloc extends FormBloc<String, String> {
   );*/
   int? kidNameSource;
   String kidImage = "";
-  String gender = 'ذكر';/*= SelectFieldBloc(
+  String gender =
+      'ذكر'; /*= SelectFieldBloc(
     items: ['ذكر','انثى'],
   );*/
   List<int> disabilityMultiSelect = <int>[];
@@ -100,17 +104,18 @@ class WizardFormBloc extends FormBloc<String, String> {
   }*/
   final testText = TextFieldBloc();
   final kidAge = TextFieldBloc();
-  Future<String?> validatekidAge(String kidAge) async{
+  Future<String?> validatekidAge(String kidAge) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (kidAge.isEmpty) {
       return 'من فضلك ادخل عمر الطفل';
     }
-    if(int.parse(kidAge) > 18 ){
+    if (int.parse(kidAge) > 18) {
       return 'يجب سن الطفل لا يتعدى ال ١٨ سنة';
     }
     return null;
   }
- /* final foundType = SelectFieldBloc(
+
+  /* final foundType = SelectFieldBloc(
     items: ["معثور عليه و تم ايواءه عند شخص معروف", "معثور عليه و تم تسليمه للشرطة",
     "طفل يتسول مع شخص بالغ","طفل يتسول بمفرده","طفل تائه"],);
   Future<String> validateFoundType(String foundType) async{
@@ -121,28 +126,30 @@ class WizardFormBloc extends FormBloc<String, String> {
     return null;
   }*/
   int? foundType;
-  final foundAddress =TextFieldBloc();
-  Future<String?> validateFoundAddress(String foundAddress) async{
+  final foundAddress = TextFieldBloc();
+  Future<String?> validateFoundAddress(String foundAddress) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (foundAddress.isEmpty) {
       return 'من فضلك ادخل عنوان العثور على الطفل';
     }
     return null;
   }
-  int? foundKidGover ;
+
+  int? foundKidGover;
   bool validateFoundKidGover = false;
-  int? foundKidDistrict ;
+  int? foundKidDistrict;
   bool validateFoundKidDistrict = false;
-  final whereAddressNow =TextFieldBloc();
-  Future<String?> validatwhereAddressNow(String whereAddressNow) async{
+  final whereAddressNow = TextFieldBloc();
+  Future<String?> validatwhereAddressNow(String whereAddressNow) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (whereAddressNow.isEmpty) {
       return 'من فضلك ادخل عنوان وجود الطفل';
     }
     return null;
   }
+
   int? whereKidGoverNow;
-  int? whereKidDistrictNow ;
+  int? whereKidDistrictNow;
   int knowKidSaver = 1;
   final clothesDescription = TextFieldBloc();
 /*  Future<String> validateClothesDescription(String clothesDescription) async{
@@ -162,19 +169,20 @@ class WizardFormBloc extends FormBloc<String, String> {
   }*/
 
   String? noRecordLost;
-  String? policeStation ;
+  String? policeStation;
   //DateTime recordDate ;
-  String? recordImage ;
+  String? recordImage;
   int _isRecordBefore = 2;
   String _isRecordBeforeText = 'لا';
-  DateTime? recordDate ;
-  Future<String?> validaterecordDate(DateTime recordDate) async{
+  DateTime? recordDate;
+  Future<String?> validaterecordDate(DateTime recordDate) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (recordDate == null && _isRecordBefore == 1) {
       return 'من فضلك ادخل تاريخ المحضر';
     }
     return null;
   }
+
   int kidHavePaper = 1;
   String? paperName;
   final paperImage = TextFieldBloc();
@@ -188,7 +196,6 @@ class WizardFormBloc extends FormBloc<String, String> {
   bool _visible = false;
 
   WizardFormBloc() {
-
     reporterName.addAsyncValidators([validateReporterName]);
     nationalId.addAsyncValidators([validateNationalId]);
     mobile.addAsyncValidators([validateMobile]);
@@ -196,7 +203,7 @@ class WizardFormBloc extends FormBloc<String, String> {
     kidName.addAsyncValidators([validateKidName]);
     kidAge.addAsyncValidators([validatekidAge]);
     //kidBirthdate.addAsyncValidators([validateKidBirthdate]);
-   // foundType.addAsyncValidators([validateFoundType]);
+    // foundType.addAsyncValidators([validateFoundType]);
     foundAddress.addAsyncValidators([validateFoundAddress]);
     whereAddressNow.addAsyncValidators([validatwhereAddressNow]);
     //clothesDescription.addAsyncValidators([validateClothesDescription]);
@@ -205,9 +212,14 @@ class WizardFormBloc extends FormBloc<String, String> {
 
     addFieldBlocs(
       step: 0,
-      fieldBlocs: [kidName,/*kidBirthdate,*/kidAge,foundAddress,
-        whereAddressNow,clothesDescription,
-        circumstances/*,recordDate*/],
+      fieldBlocs: [
+        kidName,
+        /*kidBirthdate,*/ kidAge,
+        foundAddress,
+        whereAddressNow,
+        clothesDescription,
+        circumstances /*,recordDate*/
+      ],
     );
     addFieldBlocs(
       step: 1,
@@ -230,48 +242,46 @@ class WizardFormBloc extends FormBloc<String, String> {
   void onSubmitting() async {
     if (state.currentStep == 0) {
       await Future.delayed(const Duration(milliseconds: 500));
-      if(foundKidGover == null){
+      if (foundKidGover == null) {
         validateFoundKidGover = true;
         emitFailure();
-      }else if (foundKidDistrict == null){
+      } else if (foundKidDistrict == null) {
         validateFoundKidDistrict = true;
         emitFailure();
-      }/*else if (kidNameSource == null){
+      } /*else if (kidNameSource == null){
         emitFailure();
-      }*/else if (whereKidGoverNow == null){
+      }*/
+      else if (whereKidGoverNow == null) {
         emitFailure();
-      }else if (whereKidDistrictNow == null){
+      } else if (whereKidDistrictNow == null) {
         emitFailure();
-      }else if (foundType == null){
+      } else if (foundType == null) {
         emitFailure();
-      } else if (_isRecordBefore == 1 && noRecordLost == null){
+      } else if (_isRecordBefore == 1 && noRecordLost == null) {
         emitFailure();
-      } else if (_isRecordBefore == 1 && policeStation == null){
+      } else if (_isRecordBefore == 1 && policeStation == null) {
         emitFailure();
-      } else if (_isRecordBefore == 1 && recordDate == null){
+      } else if (_isRecordBefore == 1 && recordDate == null) {
         emitFailure();
-      }else{
+      } else {
         validateFoundKidGover = false;
         validateFoundKidDistrict = false;
         emitSuccess();
       }
-    }
-    else if (state.currentStep == 1) {
+    } else if (state.currentStep == 1) {
       emitSuccess(canSubmitAgain: true);
-    }
-    else if(state.currentStep == 2) {
+    } else if (state.currentStep == 2) {
       emitSuccess();
     } else if (state.currentStep == 3) {
       await Future.delayed(Duration(milliseconds: 500));
       //emitSuccess();
-      for(int i=0;i< listOfDocs.length; i++){
+      for (int i = 0; i < listOfDocs.length; i++) {
         attachment.add(listOfDocs[i].imageName);
-        List<int> imageBytes =  listOfDocs[i].imageFile.readAsBytesSync();
+        List<int> imageBytes = listOfDocs[i].imageFile.readAsBytesSync();
         doc.add(base64Encode(imageBytes));
       }
 
-
-      try{
+      try {
         final model = FoundKidModel(
             reporterName: reporterName.value,
             nationalId: nationalId.value,
@@ -304,22 +314,20 @@ class WizardFormBloc extends FormBloc<String, String> {
             reportDate: recordDate,
             pp: 1,
             attachmentName: attachment,
-            attachmentDoc: doc
-        );
+            attachmentDoc: doc);
         print(model.toJson().toString());
-      final result= await foundKidService.createMissingKid(model);
-      print(result.isValid);
-      print(result.message);
+        final result = await foundKidService.createMissingKid(model);
+        print(result.isValid);
+        print(result.message);
         message = result.message;
-      if(result.isValid){
-        emitSuccess(canSubmitAgain: true);
-      }else{
-        emitFailure();
+        if (result.isValid) {
+          emitSuccess(canSubmitAgain: true);
+        } else {
+          emitFailure();
+        }
+      } catch (e) {
+        print('errooooooor' + e.toString());
       }
-      }catch(e){
-        print('errooooooor' +e.toString());
-      }
-
     }
   }
 }
@@ -354,7 +362,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
   bool _visibleMoreDoc = false;
   TextEditingController recordDateController = TextEditingController();
   DateTime? _selectedDate = DateTime.now();
-  bool _visibleDateValidation  = true;
+  bool _visibleDateValidation = true;
 /*
   void _toggleType() {
     setState(() {
@@ -365,11 +373,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
       }
     });
   }*/
-  removePaper(int index){
+  removePaper(int index) {
     var temp = <MultiImageModel>[];
-    for(int i = 0 ; i<listOfObjects.length ; i++){
-      if(listOfObjects[i].imageIndex != index){
-        temp.add(MultiImageModel(imageName: listOfObjects[i].imageName,imageFile: listOfObjects[i].imageFile,
+    for (int i = 0; i < listOfObjects.length; i++) {
+      if (listOfObjects[i].imageIndex != index) {
+        temp.add(MultiImageModel(
+            imageName: listOfObjects[i].imageName,
+            imageFile: listOfObjects[i].imageFile,
             imageIndex: listOfObjects[i].imageIndex));
       }
     }
@@ -378,10 +388,12 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
       listOfObjects = temp;
     });
   }
+
   File? _recordImage;
 
-  Future getImage()  async{
-    XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future getImage() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       _recordImage = File(pickedFile!.path);
@@ -390,24 +402,26 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
 
   File? _paperImage;
 
-  Future getPaperImage()  async{
-    XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future getPaperImage() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       _paperImage = File(pickedFile!.path);
     });
   }
 
-
   File? _kidImage;
 
-  Future get_kidImage()  async{
-    XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future get_kidImage() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       _kidImage = File(pickedFile!.path);
     });
   }
+
   final ScrollController _scrollController = ScrollController();
 
   late Future<void> _initForm;
@@ -438,7 +452,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
   NameSourcesModel? selectedNameSource;
   RecognitionModel? selectedRecognition;
 
-  String? selectedSource ;
+  String? selectedSource;
 
   FocusNode? pin1FocusNode;
   FocusNode? pin2FocusNode;
@@ -467,7 +481,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
   @override
   void initState() {
     super.initState();
-    helper= new DBHelper();
+    helper = new DBHelper();
     _initForm = _initStateAsync();
     pin1FocusNode = FocusNode();
     pin2FocusNode = FocusNode();
@@ -492,6 +506,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     pin21FocusNode = FocusNode();
     pin22FocusNode = FocusNode();
   }
+
   Future<void> _initStateAsync() async {
     _nameSourceList.addAll(await helper.allNameSources());
     _recognitionList.addAll(await helper.allRecognition());
@@ -500,23 +515,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     _stateSecondList.addAll(await helper.allGovers());
     _stateThirdList.addAll(await helper.allGovers());
     _disabilityList.addAll(await helper.allDisability());
-
   }
-
 
   Future<List<DistrictModel>> _fetchCityList(String id) async {
     await Future.delayed(Duration(milliseconds: 200));
     final _newCityList = <DistrictModel>[];
     List<DistrictModel> data = <DistrictModel>[];
     data.addAll(await helper.allDistricts());
-    for (int i = 0;i< data.length; i++){
-      if(data[i].goverId == id){
-        _newCityList.add(DistrictModel(districtId: data[i].districtId.toString(),districtName: data[i].districtName
-            ,goverId: data[i].goverId));
+    for (int i = 0; i < data.length; i++) {
+      if (data[i].goverId == id) {
+        _newCityList.add(DistrictModel(
+            districtId: data[i].districtId.toString(),
+            districtName: data[i].districtName,
+            goverId: data[i].goverId));
       }
     }
     return _newCityList.toList();
-
   }
 
   void _showLoadingDialog() {
@@ -532,6 +546,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
       },
     );
   }
+
   @override
   void dispose() {
     pin1FocusNode!.dispose();
@@ -559,6 +574,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
 
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     var pageHeight = MediaQuery.of(context).size.height;
@@ -587,45 +603,57 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                       height: pageHeight * 0.14,
                       child: FloatingActionButton(
                         backgroundColor: Colors.white,
-                        child: Icon(FontAwesomeIcons.question,color: kRedColor
-                          ,size: pageWidth * 0.1,),
+                        child: Icon(
+                          FontAwesomeIcons.question,
+                          color: kRedColor,
+                          size: pageWidth * 0.1,
+                        ),
                         onPressed: () {
                           Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context){
-                                return Stack(
-                                  //alignment: Alignment.center,
-                                  children: [
-                                    Image.asset("assets/images/iPhone 6, 7, 8 – 52.png",
-                                        width: double.infinity,height: pageHeight,
-                                        fit: BoxFit.fill),
-                                    Transform.translate(
-                                      offset: Offset(pageWidth * 0.04, pageHeight * 0.1),
-                                      child: RaisedButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.arrow_back_ios,
-                                              size: pageWidth * 0.04,color: Colors.white,),
-                                            Text("تخطى",style: TextStyle(
-                                                fontSize: pageWidth * 0.06,
-                                                color: Colors.white
-                                            ),),
-                                          ],
+                              builder: (BuildContext context) {
+                            return Stack(
+                              //alignment: Alignment.center,
+                              children: [
+                                Image.asset(
+                                    "assets/images/iPhone 6, 7, 8 – 52.png",
+                                    width: double.infinity,
+                                    height: pageHeight,
+                                    fit: BoxFit.fill),
+                                Transform.translate(
+                                  offset: Offset(
+                                      pageWidth * 0.04, pageHeight * 0.1),
+                                  child: ElevatedButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.arrow_back_ios,
+                                          size: pageWidth * 0.04,
+                                          color: Colors.white,
                                         ),
-                                        color: Colors.transparent,
-                                        elevation: 0,
-                                      ),
+                                        Text(
+                                          "تخطى",
+                                          style: TextStyle(
+                                              fontSize: pageWidth * 0.06,
+                                              color: Colors.white),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                );
-                              }
-                          ));
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      elevation: 0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }));
                         },
                       ),
                     ),
                   ),
                 ],
-              ) ,
+              ),
               /*floatingActionButton: Visibility(
                 visible: _visibleButton,
                 child: Row(
@@ -649,13 +677,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   ],
                 ),
               ),*/
-              endDrawer: MainDrawer(screenHeight: pageHeight, screenWidth: pageWidth) ,
+              endDrawer:
+                  MainDrawer(screenHeight: pageHeight, screenWidth: pageWidth),
               appBar: AppBar(
                 //toolbarHeight: pageHeight*0.3,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: InkWell(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => StartPage(firstTime: false,))),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StartPage(
+                                firstTime: false,
+                              ))),
                   child: Icon(
                     Icons.arrow_back,
                     color: Colors.black54,
@@ -665,184 +699,228 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               body: FutureBuilder(
                 future: _initForm,
                 builder: (context, snapshot) {
-                    return SingleChildScrollView(
-                      controller: _scrollController,
-                      child: Column(
-                        children: [
-                          LogoRow(screenHeight: pageHeight),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('الإبلاغ عن العثور على طفل',style: TextStyle(
+                  return SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Column(
+                      children: [
+                        LogoRow(screenHeight: pageHeight),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'الإبلاغ عن العثور على طفل',
+                              style: TextStyle(
                                 color: Color(0xFFFEDA90),
                                 fontSize: pageWidth * 0.04,
                                 fontWeight: FontWeight.bold,
-                              ),)
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('جميع البيانات المقدمة من خلال الاستمارة تحظى بالسرية التامة',
-                                style: TextStyle(
-                                  color: kTextColor,
-                                  fontSize: pageWidth * 0.04,
-                                ),)
-                            ],
-                          ),
-                          Container(
-                            height: pageHeight * 0.7,
-                            child: FormBlocListener<WizardFormBloc, String, String>(
-                              onSubmitting: (context, state) => LoadingDialog.show(context),
-                              onSubmissionFailed: (context, state) => LoadingDialog.hide(context),
-                              onSuccess: (context, state) {
-                                LoadingDialog.hide(context);
-                                if (state.stepCompleted == state.lastStep) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(builder: (_) => SuccessScreen()));
-                                }
-                              },
-                              onFailure: (context, state) {
-                                LoadingDialog.hide(context);
-                                showDialog(context: context,builder: (context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                                    content: SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          /* Row(
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'جميع البيانات المقدمة من خلال الاستمارة تحظى بالسرية التامة',
+                              style: TextStyle(
+                                color: kTextColor,
+                                fontSize: pageWidth * 0.04,
+                              ),
+                            )
+                          ],
+                        ),
+                        Container(
+                          height: pageHeight * 0.7,
+                          child:
+                              FormBlocListener<WizardFormBloc, String, String>(
+                            onSubmitting: (context, state) =>
+                                LoadingDialog.show(context),
+                            onSubmissionFailed: (context, state) =>
+                                LoadingDialog.hide(context),
+                            onSuccess: (context, state) {
+                              LoadingDialog.hide(context);
+                              if (state.stepCompleted == state.lastStep) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (_) => SuccessScreen()));
+                              }
+                            },
+                            onFailure: (context, state) {
+                              LoadingDialog.hide(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15))),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            /* Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             IconButton(icon: Icon(Icons.close,size: 40,),
                                               onPressed: () => Navigator.of(context).pop(),),
                                           ],
                                         ),*/
-                                          SizedBox(height: pageHeight * 0.04,),
-                                          Center(
-                                            child: Text(message ?? 'من فضلك قم اكمل البيانات',
-                                              style: TextStyle(
-                                                  color: kTextColor,
-                                                  fontSize: 18,
-                                                  height: 1
-                                              ),
-                                              textDirection: TextDirection.rtl,
-                                              textAlign: TextAlign.center,
-                                              //overflow: TextOverflow.ellipsis,
-                                              //maxLines: 10,
+                                            SizedBox(
+                                              height: pageHeight * 0.04,
                                             ),
-                                          ),
-                                        ],
+                                            Center(
+                                              child: Text(
+                                                message ??
+                                                    'من فضلك قم اكمل البيانات',
+                                                style: TextStyle(
+                                                    color: kTextColor,
+                                                    fontSize: 18,
+                                                    height: 1),
+                                                textDirection:
+                                                    TextDirection.rtl,
+                                                textAlign: TextAlign.center,
+                                                //overflow: TextOverflow.ellipsis,
+                                                //maxLines: 10,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                });
-                              },
-                              child: Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: StepperFormBlocBuilder<WizardFormBloc>(
-                                  formBloc: context.read<WizardFormBloc>(),
-                                  type: _type,
-                                  physics: ClampingScrollPhysics(),
-                                  controlsBuilder: (context, onStepContinue,
-                                      onStepCancel, step, formBloc) {
-                                    return Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(top: pageHeight * 0.02
-                                              /*,bottom: pageHeight * 0.1*/),
-                                          child: Container(
-                                            width: pageWidth * 0.40,
-                                            height: pageHeight * 0.07,
-                                            child: FlatButton(
-                                              onPressed: onStepCancel,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  Icon(
-                                                    Icons.arrow_back_rounded,
-                                                    color:  step == 0 ? Color(0xFFe4e4e4) : kTextColor,
-                                                    size: 30,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    'السابق',
-                                                    style:  TextStyle(
-                                                        color:  step == 0 ? Color(0xFFe4e4e4) : kTextColor,
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                        FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              color: step == 0 ? Color(0xFFe4e4e4) : Colors.transparent,
+                                    );
+                                  });
+                            },
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: StepperFormBlocBuilder<WizardFormBloc>(
+                                formBloc: context.read<WizardFormBloc>(),
+                                type: _type,
+                                physics: ClampingScrollPhysics(),
+                                controlsBuilder: (context, onStepContinue,
+                                    onStepCancel, step, formBloc) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: pageHeight *
+                                                0.02 /*,bottom: pageHeight * 0.1*/),
+                                        child: Container(
+                                          width: pageWidth * 0.40,
+                                          height: pageHeight * 0.07,
+                                          child: TextButton(
+                                            onPressed: onStepCancel,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Icon(
+                                                  Icons.arrow_back_rounded,
+                                                  color: step == 0
+                                                      ? Color(0xFFe4e4e4)
+                                                      : kTextColor,
+                                                  size: 30,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'السابق',
+                                                  style: TextStyle(
+                                                      color: step == 0
+                                                          ? Color(0xFFe4e4e4)
+                                                          : kTextColor,
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
                                             ),
-                                            decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                borderRadius: BorderRadius.circular(25),
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                )
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: step == 0
+                                                  ? Color(0xFFe4e4e4)
+                                                  : Colors.transparent,
                                             ),
                                           ),
+                                          decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              border: Border.all(
+                                                  color: Colors.grey)),
                                         ),
-                                        new Padding(
-                                          padding: new EdgeInsets.all(10),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: pageHeight * 0.02
-                                             /* ,bottom: pageHeight * 0.1*/),
-                                          child: Container(
-                                            width: pageWidth * 0.40,
-                                            height: pageHeight * 0.07,
-                                            child: FlatButton(onPressed: () {
+                                      ),
+                                      new Padding(
+                                        padding: new EdgeInsets.all(10),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: pageHeight *
+                                                0.02 /* ,bottom: pageHeight * 0.1*/),
+                                        child: Container(
+                                          width: pageWidth * 0.40,
+                                          height: pageHeight * 0.07,
+                                          child: TextButton(
+                                            onPressed: () {
                                               onStepContinue!();
                                               setState(() {
                                                 _visibleButton = false;
                                               });
                                             },
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  Text(step == 3 ? "تأكيد" : "التالى",
-                                                    style: TextStyle(color: Colors.white,fontSize: 25,
-                                                      fontWeight: FontWeight.bold),),
-                                                  SizedBox(width: 5,),
-                                                  Icon(Icons.arrow_forward,color: Colors.white,size: 30,),
-                                                ],
-                                              ),
-
-                                            ),
-                                            decoration: BoxDecoration(
-                                              gradient: kGradientColor,
-                                              borderRadius: BorderRadius.circular(25),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Text(
+                                                  step == 3
+                                                      ? "تأكيد"
+                                                      : "التالى",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Icon(
+                                                  Icons.arrow_forward,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                ),
+                                              ],
                                             ),
                                           ),
+                                          decoration: BoxDecoration(
+                                            gradient: kGradientColor,
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
                                         ),
-                                      ],
-                                    );
-                                  },
-                                  stepsBuilder: (formBloc) {
-                                    return [
-                                      _personalStep(formBloc!,pageWidth,pageHeight),
-                                      _accountStep(formBloc,pageWidth,pageHeight),
-                                      _socialStep(formBloc,pageWidth,pageHeight),
-                                      _confirmation(formBloc, pageWidth, pageHeight),
-                                    ];
-                                  },
-                                ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                stepsBuilder: (formBloc) {
+                                  return [
+                                    _personalStep(
+                                        formBloc!, pageWidth, pageHeight),
+                                    _accountStep(
+                                        formBloc, pageWidth, pageHeight),
+                                    _socialStep(
+                                        formBloc, pageWidth, pageHeight),
+                                    _confirmation(
+                                        formBloc, pageWidth, pageHeight),
+                                  ];
+                                },
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    );
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
@@ -852,9 +930,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     );
   }
 
-
-  FormBlocStep _personalStep(WizardFormBloc wizardFormBloc,var pageWidth,var pageHeight) {
-
+  FormBlocStep _personalStep(
+      WizardFormBloc wizardFormBloc, var pageWidth, var pageHeight) {
     return FormBlocStep(
       title: Text(''),
       content: Column(
@@ -862,15 +939,25 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('بيانات الطفل',style: TextStyle(color: kPrimaryColor,
-                  fontWeight: FontWeight.bold,fontSize: 30),),
+              Text(
+                'بيانات الطفل',
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('بيانات الطفل',style: TextStyle(color: kRedColor
-                  ,fontWeight: FontWeight.w900,fontSize: 20),),
+              Text(
+                'بيانات الطفل',
+                style: TextStyle(
+                    color: kRedColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20),
+              ),
             ],
           ),
           TextFieldBlocBuilder(
@@ -882,9 +969,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               labelText: 'اسم الطفل',
             ),
           ),
-
           Padding(
-            padding: EdgeInsets.only(top: pageHeight * 0.02,bottom: pageHeight *0.01),
+            padding: EdgeInsets.only(
+                top: pageHeight * 0.02, bottom: pageHeight * 0.01),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<NameSourcesModel>(
@@ -892,25 +979,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   labelText: "مصدر المعرفة باسم الطفل",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _nameSourceList
                     .map((itm) => DropdownMenuItem(
-                  child: Container(
-                    child: Text(itm.name, textAlign: TextAlign.right),
-                    alignment: Alignment.centerRight,
-                  ),
-                  value: itm,
-                ))
+                          child: Container(
+                            child: Text(itm.name, textAlign: TextAlign.right),
+                            alignment: Alignment.centerRight,
+                          ),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedNameSource,
                 onChanged: (value) {
@@ -922,7 +1003,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               ),
             ),
           ),
-         /* Visibility(
+          /* Visibility(
             visible: wizardFormBloc.kidNameSource != null ? false : true,
             child: Row(
               children: [
@@ -934,14 +1015,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),*/
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: TextFormField(
-                onTap: () async{
-                  final pickedFile =
-                  await ImagePicker().pickImage(source: ImageSource.gallery);
+                onTap: () async {
+                  final pickedFile = await ImagePicker()
+                      .pickImage(source: ImageSource.gallery);
 
                   setState(() {
                     _kidImage = File(pickedFile!.path);
@@ -956,22 +1036,16 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   prefixIcon: Icon(Icons.upload_rounded),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                 ),
                 autovalidateMode: AutovalidateMode.always,
                 validator: (value) {
-                  if(_kidImage == null){
+                  if (_kidImage == null) {
                     return 'من فضلك قم بتحميل صورة الطفل';
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -984,29 +1058,32 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _kidImage == null ? Text('',
-                style: TextStyle(fontSize: 20),
-              )
+              _kidImage == null
+                  ? Text(
+                      '',
+                      style: TextStyle(fontSize: 20),
+                    )
                   : Container(
-                child: Image.file(
-                  _kidImage!,
-                ),
-                height: pageHeight * 0.1,
-                width: pageWidth * 0.7,
-              ),
+                      child: Image.file(
+                        _kidImage!,
+                      ),
+                      height: pageHeight * 0.1,
+                      width: pageWidth * 0.7,
+                    ),
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('نوع الطفل',style:
-              TextStyle(color: kTextColor,fontSize: pageWidth * 0.045),),
+              Text(
+                'نوع الطفل',
+                style:
+                    TextStyle(color: kTextColor, fontSize: pageWidth * 0.045),
+              ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -1040,7 +1117,6 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
               ],
             ),
           ),
@@ -1079,22 +1155,27 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                       if (value == true) {
                         wizardFormBloc.healthStat.add(1);
                         wizardFormBloc.healthStatName.add('سليم');
-                        for(int i=0;i<wizardFormBloc.healthStat.length;i++){
-                          if(wizardFormBloc.healthStat[i] != 1)
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStat.length;
+                            i++) {
+                          if (wizardFormBloc.healthStat[i] != 1)
                             wizardFormBloc.healthStat.removeAt(i);
                         }
-                        wizardFormBloc.healthStat = wizardFormBloc.healthStat.toSet().toList();
-                        if(wizardFormBloc.disabilityMultiSelect.length != 0){
+                        wizardFormBloc.healthStat =
+                            wizardFormBloc.healthStat.toSet().toList();
+                        if (wizardFormBloc.disabilityMultiSelect.length != 0) {
                           wizardFormBloc.disabilityMultiSelect.clear();
                           wizardFormBloc.disabilityName.clear();
                         }
 
-                        for(int i=0;i<wizardFormBloc.healthStatName.length;i++){
-                          if(wizardFormBloc.healthStatName[i] != 'سليم')
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStatName.length;
+                            i++) {
+                          if (wizardFormBloc.healthStatName[i] != 'سليم')
                             wizardFormBloc.healthStatName.removeAt(i);
                         }
-                        wizardFormBloc.healthStatName = wizardFormBloc.healthStatName.toSet().toList();
-
+                        wizardFormBloc.healthStatName =
+                            wizardFormBloc.healthStatName.toSet().toList();
                       } else {
                         wizardFormBloc.healthStat.remove(1);
                         wizardFormBloc.healthStatName.remove('سليم');
@@ -1103,7 +1184,6 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
                 SizedBox(
                   width: pageWidth * 0.18,
                 ),
@@ -1121,18 +1201,24 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                       if (value == true) {
                         wizardFormBloc.healthStat.add(2);
                         wizardFormBloc.healthStatName.add('مريض بمرض مزمن');
-                        for(int i=0;i<wizardFormBloc.healthStat.length;i++){
-                          if(wizardFormBloc.healthStat[i] == 1)
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStat.length;
+                            i++) {
+                          if (wizardFormBloc.healthStat[i] == 1)
                             wizardFormBloc.healthStat.removeAt(i);
                         }
-                        wizardFormBloc.healthStat = wizardFormBloc.healthStat.toSet().toList();
+                        wizardFormBloc.healthStat =
+                            wizardFormBloc.healthStat.toSet().toList();
 
-                        for(int i=0;i<wizardFormBloc.healthStatName.length;i++){
-                          if(wizardFormBloc.healthStatName[i] != 'مريض بمرض مزمن')
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStatName.length;
+                            i++) {
+                          if (wizardFormBloc.healthStatName[i] !=
+                              'مريض بمرض مزمن')
                             wizardFormBloc.healthStatName.removeAt(i);
                         }
-                        wizardFormBloc.healthStatName = wizardFormBloc.healthStatName.toSet().toList();
-
+                        wizardFormBloc.healthStatName =
+                            wizardFormBloc.healthStatName.toSet().toList();
                       } else {
                         wizardFormBloc.healthStat.remove(2);
                         wizardFormBloc.healthStatName.remove('مريض بمرض مزمن');
@@ -1141,11 +1227,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
               ],
             ),
           ),
-
           Padding(
             padding: EdgeInsets.only(
                 right: pageWidth * 0.02,
@@ -1168,17 +1252,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                         _visible = true;
                         wizardFormBloc.healthStat.add(3);
                         wizardFormBloc.healthStatName.add('ذوى اعاقة');
-                        for(int i=0;i<wizardFormBloc.healthStat.length;i++){
-                          if(wizardFormBloc.healthStat[i] == 1)
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStat.length;
+                            i++) {
+                          if (wizardFormBloc.healthStat[i] == 1)
                             wizardFormBloc.healthStat.removeAt(i);
                         }
-                        wizardFormBloc.healthStat = wizardFormBloc.healthStat.toSet().toList();
-                        for(int i=0;i<wizardFormBloc.healthStatName.length;i++){
-                          if(wizardFormBloc.healthStatName[i] != 'ذوى اعاقة')
+                        wizardFormBloc.healthStat =
+                            wizardFormBloc.healthStat.toSet().toList();
+                        for (int i = 0;
+                            i < wizardFormBloc.healthStatName.length;
+                            i++) {
+                          if (wizardFormBloc.healthStatName[i] != 'ذوى اعاقة')
                             wizardFormBloc.healthStatName.removeAt(i);
                         }
-                        wizardFormBloc.healthStatName = wizardFormBloc.healthStatName.toSet().toList();
-
+                        wizardFormBloc.healthStatName =
+                            wizardFormBloc.healthStatName.toSet().toList();
                       } else {
                         _visible = false;
                         wizardFormBloc.healthStat.remove(3);
@@ -1188,7 +1277,6 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
               ],
             ),
           ),
@@ -1206,42 +1294,38 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Visibility(
             visible: _visible,
             child: Padding(
-              padding: EdgeInsets.only(top: pageHeight * 0.02,bottom: pageHeight *0.01),
+              padding: EdgeInsets.only(
+                  top: pageHeight * 0.02, bottom: pageHeight * 0.01),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: DropdownButtonFormField<DisabilityModel>(
                   decoration: InputDecoration(
                     labelText: "نوع الاعاقة",
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        )
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.grey)),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        )
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.grey)),
                   ),
                   autovalidateMode: AutovalidateMode.always,
-                  validator: wizardFormBloc.healthStat.contains(3) ?  (value) {
-                    if(value == null){
-                      return 'من فضلك اختر نوع الاعاقة';
-                    }
-                    else{
-                      return null;
-                    }
-                  } : null,
+                  validator: wizardFormBloc.healthStat.contains(3)
+                      ? (value) {
+                          if (value == null) {
+                            return 'من فضلك اختر نوع الاعاقة';
+                          } else {
+                            return null;
+                          }
+                        }
+                      : null,
                   items: _disabilityList
                       .map((itm) => DropdownMenuItem(
-                    child: Container(
-                      child: Text(itm.name, textAlign: TextAlign.right),
-                      alignment: Alignment.centerRight,
-                    ),
-                    value: itm,
-                  ))
+                            child: Container(
+                              child: Text(itm.name, textAlign: TextAlign.right),
+                              alignment: Alignment.centerRight,
+                            ),
+                            value: itm,
+                          ))
                       .toList(),
                   value: selectedDisability,
                   onChanged: (value) {
@@ -1287,7 +1371,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             keyboardType: TextInputType.number,
             textDirection: TextDirection.rtl,
             maxLength: 2,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+            ],
             focusNode: pin8FocusNode,
             decoration: InputDecoration(
               labelText: 'عمر الطفل ولو بشكل تقريبى',
@@ -1298,11 +1384,17 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('تفاصيل العثور على الطفل',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+                Text(
+                  'تفاصيل العثور على الطفل',
+                  style: TextStyle(
+                      color: kRedColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
+                ),
               ],
             ),
           ),
-        /*  DropdownFieldBlocBuilder<String>(
+          /*  DropdownFieldBlocBuilder<String>(
             selectFieldBloc: wizardFormBloc.foundType,
             textAlign: TextAlign.right,
             focusNode: pin9FocusNode,
@@ -1314,7 +1406,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             itemBuilder: (context, String value) => value,
           ),*/
           Padding(
-            padding: EdgeInsets.only(top: pageHeight * 0.02,bottom: pageHeight *0.01),
+            padding: EdgeInsets.only(
+                top: pageHeight * 0.02, bottom: pageHeight * 0.01),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<RecognitionModel>(
@@ -1322,25 +1415,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   labelText: "طريقة التعرف على الطفل",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _recognitionList
                     .map((itm) => DropdownMenuItem(
-                  child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(itm.name, textAlign: TextAlign.right)
-                  ),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child:
+                                  Text(itm.name, textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedRecognition,
                 onChanged: (value) {
@@ -1366,31 +1453,30 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('مكان العثور على الطفل',style: TextStyle(color: kTextColor,fontWeight: FontWeight.bold,fontSize: 20),),
+              Text(
+                'مكان العثور على الطفل',
+                style: TextStyle(
+                    color: kTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageHeight * 0.02),
+            padding: EdgeInsets.only(top: pageHeight * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<GoverModel>(
                 decoration: InputDecoration(
                   labelText: "اختر المحافظة",
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
-               /* autovalidate: true,
+                /* autovalidate: true,
                 validator: (value) {
                   if(value == null){
                     return 'من فضلك اختر المحافظة التي تم العثور على الطفل فيها';
@@ -1401,10 +1487,12 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                 },*/
                 items: _stateSecondList
                     .map((itm) => DropdownMenuItem(
-                  child: Container( alignment: Alignment.centerRight,
-                      child: Text(itm.goverName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.goverName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedSecondState,
                 onChanged: (value) async {
@@ -1435,26 +1523,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           ),
           Padding(
             padding: EdgeInsets.only(
-                top: pageHeight * 0.02,bottom: pageHeight*0.01),
+                top: pageHeight * 0.02, bottom: pageHeight * 0.01),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<DistrictModel>(
                 decoration: InputDecoration(
                   labelText: "اختر المركز",
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
-            /*    autovalidate: true,
+                /*    autovalidate: true,
                 validator: (value) {
                   if(value == null){
                     return 'من فضلك اختر المركز الذي تم العثور على الطفل فيه';
@@ -1465,16 +1547,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                 },*/
                 items: _citySecondList
                     .map((itm) => DropdownMenuItem(
-                  child: Container(alignment: Alignment.centerRight,
-                      child: Text(itm.districtName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.districtName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedSecondCity,
                 onChanged: (value) {
                   setState(() {
                     this.selectedSecondCity = value!;
-                    wizardFormBloc.foundKidDistrict = int.parse(value.districtId.toString());
+                    wizardFormBloc.foundKidDistrict =
+                        int.parse(value.districtId.toString());
                   });
                 },
               ),
@@ -1504,36 +1589,37 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('مكان تواجد الطفل حاليا',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+              Text(
+                'مكان تواجد الطفل حاليا',
+                style: TextStyle(
+                    color: kRedColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20),
+              ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageHeight * 0.02),
+            padding: EdgeInsets.only(top: pageHeight * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<GoverModel>(
                 decoration: InputDecoration(
                   labelText: "اختر المحافظة",
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _stateSecondList
                     .map((itm) => DropdownMenuItem(
-                  child: Container(alignment: Alignment.centerRight,
-                      child: Text(itm.goverName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.goverName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedThirdState,
                 onChanged: (value) async {
@@ -1564,37 +1650,34 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           ),
           Padding(
             padding: EdgeInsets.only(
-                top: pageHeight * 0.02,bottom: pageHeight*0.01),
+                top: pageHeight * 0.02, bottom: pageHeight * 0.01),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<DistrictModel>(
                 decoration: InputDecoration(
                   labelText: "اختر المركز",
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _cityThirdList
                     .map((itm) => DropdownMenuItem(
-                  child: Container(alignment: Alignment.centerRight,
-                      child: Text(itm.districtName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.districtName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedThirdCity,
                 onChanged: (value) {
                   setState(() {
                     this.selectedThirdCity = value;
-                    wizardFormBloc.whereKidDistrictNow = int.parse(value!.districtId);
+                    wizardFormBloc.whereKidDistrictNow =
+                        int.parse(value!.districtId);
                   });
                 },
               ),
@@ -1624,13 +1707,15 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('هل هناك معرفة بالقائمين على إيواء الطفل حاليا',style:
-              TextStyle(color: kTextColor,fontSize: pageWidth * 0.045),),
+              Text(
+                'هل هناك معرفة بالقائمين على إيواء الطفل حاليا',
+                style:
+                    TextStyle(color: kTextColor, fontSize: pageWidth * 0.045),
+              ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -1664,16 +1749,23 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: pageHeight * 0.02,),
+            padding: EdgeInsets.only(
+              top: pageHeight * 0.02,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('مواصفات ملابس الطفل وعلامات مميزة له',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+                Text(
+                  'مواصفات ملابس الطفل وعلامات مميزة له',
+                  style: TextStyle(
+                      color: kRedColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
+                ),
               ],
             ),
           ),
@@ -1709,11 +1801,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: pageHeight * 0.02,),
+            padding: EdgeInsets.only(
+              top: pageHeight * 0.02,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('بيانات المحضر',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+                Text(
+                  'بيانات المحضر',
+                  style: TextStyle(
+                      color: kRedColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
+                ),
               ],
             ),
           ),
@@ -1729,10 +1829,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               ),
             ],
           ),
-
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -1787,15 +1885,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     });
                   },
                 ),
-
               ],
             ),
           ),
           Visibility(
             visible: _visibleRecord,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageWidth * 0.02),
+              padding: EdgeInsets.only(top: pageWidth * 0.02),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextFormField(
@@ -1806,18 +1902,12 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     labelText: "رقم المحضر",
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                   ),
-                 /* autovalidate: true,
+                  /* autovalidate: true,
                   validator:  wizardFormBloc._isRecordBefore == 1 ? (value) {
                     if(value.isEmpty){
                       return 'من فضلك ادخل رقم المحضر';
@@ -1829,7 +1919,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.right,
                   keyboardType: TextInputType.number,
-                  onChanged : (value) {
+                  onChanged: (value) {
                     setState(() {
                       wizardFormBloc.noRecordLost = value;
                     });
@@ -1852,8 +1942,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Visibility(
             visible: _visibleRecord,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageWidth * 0.02),
+              padding: EdgeInsets.only(top: pageWidth * 0.02),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextFormField(
@@ -1864,19 +1953,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     labelText: "قسم الشرطة",
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                   ),
                   //autovalidate: true,
-                /*  validator:  wizardFormBloc._isRecordBefore == 1 ? (value) {
+                  /*  validator:  wizardFormBloc._isRecordBefore == 1 ? (value) {
                     if(value.isEmpty){
                       return 'من فضلك ادخل قسم الشرطة';
                     }
@@ -1896,8 +1979,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               ),
             ),
           ),
-           Visibility(
-             visible: _visibleRecord && wizardFormBloc.policeStation == null,
+          Visibility(
+            visible: _visibleRecord && wizardFormBloc.policeStation == null,
             child: Row(
               children: [
                 Text(
@@ -1910,15 +1993,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Visibility(
             visible: _visibleRecord,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageWidth * 0.02),
+              padding: EdgeInsets.only(top: pageWidth * 0.02),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextFormField(
-                  onTap: () async{
-
-                    final pickedFile =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                  onTap: () async {
+                    final pickedFile = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
 
                     setState(() {
                       _recordImage = File(pickedFile!.path);
@@ -1933,16 +2014,10 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     prefixIcon: Icon(Icons.upload_rounded),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                   ),
                   textDirection: TextDirection.rtl,
                   readOnly: true,
@@ -1956,16 +2031,16 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             children: [
               _recordImage == null
                   ? Text(
-                '',
-                style: TextStyle(fontSize: 20),
-              )
+                      '',
+                      style: TextStyle(fontSize: 20),
+                    )
                   : Container(
-                child: Image.file(
-                  _recordImage!,
-                ),
-                height: pageHeight * 0.1,
-                width: pageWidth * 0.7,
-              ),
+                      child: Image.file(
+                        _recordImage!,
+                      ),
+                      height: pageHeight * 0.1,
+                      width: pageWidth * 0.7,
+                    ),
             ],
           ),
           /*Visibility(
@@ -2000,30 +2075,34 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             visible: _visibleRecord,
             child: Padding(
               padding: EdgeInsets.only(
-                top: pageHeight * 0.02, bottom: pageHeight * 0.02,),
+                top: pageHeight * 0.02,
+                bottom: pageHeight * 0.02,
+              ),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextFormField(
                   controller: recordDateController,
-                  onTap: (){
+                  onTap: () {
                     showDatePicker(
-                        context: context,
-                        builder: (context, child) {
-                          return Theme(
-                            data: ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.fromSwatch(
-                                primarySwatch: Colors.green,
-                                primaryColorDark: Colors.green,
-                                accentColor: Colors.green,
-                              ),
-                              dialogBackgroundColor: Colors.white,
-                            ),
-                            child: child!,
-                          );
-                        },
-                        initialDate: _selectedDate == null ? DateTime.now() : _selectedDate!,
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now())
+                            context: context,
+                            builder: (context, child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.fromSwatch(
+                                    primarySwatch: Colors.green,
+                                    // primaryColorDark: Colors.green,
+                                    accentColor: Colors.green,
+                                  ),
+                                  dialogBackgroundColor: Colors.white,
+                                ),
+                                child: child!,
+                              );
+                            },
+                            initialDate: _selectedDate == null
+                                ? DateTime.now()
+                                : _selectedDate!,
+                            firstDate: DateTime(1995),
+                            lastDate: DateTime.now())
                         .then((value) {
                       if (value == null) {
                         _visibleDateValidation = true;
@@ -2038,24 +2117,21 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                       });
                     });
                   },
-                  style: TextStyle(fontSize: 20,color: kTextColor),
+                  style: TextStyle(fontSize: 20, color: kTextColor),
                   decoration: InputDecoration(
                     labelText: 'تاريخه',
                     labelStyle: TextStyle(color: kTextColor),
-                    prefixIcon: Icon(Icons.calendar_today_outlined,color: kTextColor,),
+                    prefixIcon: Icon(
+                      Icons.calendar_today_outlined,
+                      color: kTextColor,
+                    ),
                     hintText: dateFormat(_selectedDate!),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: kBorderColor
-                        )
-                    ),
+                        borderSide: BorderSide(color: kBorderColor)),
                   ),
                   textDirection: TextDirection.rtl,
                   readOnly: true,
@@ -2079,7 +2155,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     );
   }
 
-  FormBlocStep _accountStep(WizardFormBloc wizardFormBloc,var pageWidth,var pageHeight) {
+  FormBlocStep _accountStep(
+      WizardFormBloc wizardFormBloc, var pageWidth, var pageHeight) {
     return FormBlocStep(
       title: Text(''),
       content: Column(
@@ -2087,13 +2164,25 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('بيانات المبلغ',style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 30),),
+              Text(
+                'بيانات المبلغ',
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('بيانات المبلغ',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+              Text(
+                'بيانات المبلغ',
+                style: TextStyle(
+                    color: kRedColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20),
+              ),
             ],
           ),
           TextFieldBlocBuilder(
@@ -2111,8 +2200,10 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             textFieldBloc: wizardFormBloc.nationalId,
             keyboardType: TextInputType.number,
             textDirection: TextDirection.rtl,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-              LengthLimitingTextInputFormatter(14)],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+              LengthLimitingTextInputFormatter(14)
+            ],
             maxLength: 14,
             focusNode: pin2FocusNode,
             decoration: InputDecoration(
@@ -2123,7 +2214,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             textFieldBloc: wizardFormBloc.mobile,
             keyboardType: TextInputType.number,
             textDirection: TextDirection.rtl,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+            ],
             maxLength: 11,
             focusNode: pin3FocusNode,
             //nextFocusNode: pin3FocusNode,
@@ -2131,17 +2224,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
               labelText: 'رقم تليفون المبلغ',
             ),
           ),
-
-
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('عنوان المبلغ',style: TextStyle(color: kRedColor,fontWeight: FontWeight.w900,fontSize: 20),),
+              Text(
+                'عنوان المبلغ',
+                style: TextStyle(
+                    color: kRedColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20),
+              ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageHeight * 0.02),
+            padding: EdgeInsets.only(top: pageHeight * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<GoverModel>(
@@ -2150,23 +2246,19 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   labelText: "اختر المحافظة",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _stateList
                     .map((itm) => DropdownMenuItem(
-                  child: Container( alignment: Alignment.centerRight,
-                      child: Text(itm.goverName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.goverName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedState,
                 onChanged: (value) async {
@@ -2181,8 +2273,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     _cityList.addAll(cityList);
                   });
                   Navigator.pop(context);
-                  FocusScope.of(context)
-                      .requestFocus(pin5FocusNode);
+                  FocusScope.of(context).requestFocus(pin5FocusNode);
                 },
                 /* onTap: () {
                   FocusScope.of(context)
@@ -2203,7 +2294,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),*/
           Padding(
-            padding: EdgeInsets.only(top: pageHeight * 0.02,bottom: pageHeight * 0.01),
+            padding: EdgeInsets.only(
+                top: pageHeight * 0.02, bottom: pageHeight * 0.01),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: DropdownButtonFormField<DistrictModel>(
@@ -2214,32 +2306,28 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   //labelText: "اختر المركز",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      )
-                  ),
+                      borderSide: BorderSide(color: Colors.grey)),
                 ),
                 items: _cityList
                     .map((itm) => DropdownMenuItem(
-                  child: Container( alignment: Alignment.centerRight,
-                      child: Text(itm.districtName, textAlign: TextAlign.right)),
-                  value: itm,
-                ))
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(itm.districtName,
+                                  textAlign: TextAlign.right)),
+                          value: itm,
+                        ))
                     .toList(),
                 value: selectedCity,
                 onChanged: (value) {
                   setState(() {
                     this.selectedCity = value!;
-                    wizardFormBloc.districts = int.parse(value.districtId.toString());
+                    wizardFormBloc.districts =
+                        int.parse(value.districtId.toString());
                     wizardFormBloc.districtsName = value.districtName;
-                    FocusScope.of(context)
-                        .requestFocus(pin6FocusNode);
+                    FocusScope.of(context).requestFocus(pin6FocusNode);
                     _visibleButton = true;
                   });
                 },
@@ -2286,7 +2374,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     );
   }
 
-  FormBlocStep _socialStep(WizardFormBloc wizardFormBloc,var pageWidth,var pageHeight) {
+  FormBlocStep _socialStep(
+      WizardFormBloc wizardFormBloc, var pageWidth, var pageHeight) {
     return FormBlocStep(
       title: Text(''),
       content: Column(
@@ -2294,7 +2383,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('مرفقات للتعرف على الطفل',style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 30),),
+              Text(
+                'مرفقات للتعرف على الطفل',
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
             ],
           ),
 /*
@@ -2339,8 +2434,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           ),
 */
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: TextFormField(
@@ -2351,16 +2445,10 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   labelText: "اسم المرفق",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                 ),
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
@@ -2371,8 +2459,7 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: pageWidth * 0.02),
+            padding: EdgeInsets.only(top: pageWidth * 0.02),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: TextFormField(
@@ -2384,16 +2471,10 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                   prefixIcon: Icon(Icons.file_upload),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: kBorderColor
-                      )
-                  ),
+                      borderSide: BorderSide(color: kBorderColor)),
                 ),
                 textDirection: TextDirection.rtl,
                 readOnly: true,
@@ -2401,7 +2482,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),
           Visibility(
-            visible: (_visibledoc && wizardFormBloc.kidHavePaper == 1) ? true : false,
+            visible: (_visibledoc && wizardFormBloc.kidHavePaper == 1)
+                ? true
+                : false,
             child: Row(
               children: [
                 Text(
@@ -2412,7 +2495,9 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             ),
           ),
           Visibility(
-            visible: (_visibleMoreDoc && wizardFormBloc.kidHavePaper == 1) ? true : false,
+            visible: (_visibleMoreDoc && wizardFormBloc.kidHavePaper == 1)
+                ? true
+                : false,
             child: Row(
               children: [
                 Text(
@@ -2426,18 +2511,32 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _paperImage == null ? Text('',
-                style: TextStyle(fontSize: 20),) :
-              Container(child: Image.file(_paperImage!,),
-                height: pageHeight * 0.1,width: pageWidth * 0.7,),
+              _paperImage == null
+                  ? Text(
+                      '',
+                      style: TextStyle(fontSize: 20),
+                    )
+                  : Container(
+                      child: Image.file(
+                        _paperImage!,
+                      ),
+                      height: pageHeight * 0.1,
+                      width: pageWidth * 0.7,
+                    ),
             ],
           ),
-          SizedBox(height: pageHeight * 0.01,),
+          SizedBox(
+            height: pageHeight * 0.01,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _paperName.text != "" ? Text(_paperName.text,style: TextStyle(fontSize: 20),)
+              _paperName.text != ""
+                  ? Text(
+                      _paperName.text,
+                      style: TextStyle(fontSize: 20),
+                    )
                   : Text('')
             ],
           ),
@@ -2449,55 +2548,65 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                 Container(
                   width: pageWidth * 0.45,
                   height: pageHeight * 0.07,
-                  child: FlatButton(onPressed: wizardFormBloc.kidHavePaper == 1 ?  () {
-                    if(listOfObjects.length >= 2){
-                      setState(() {
-                        _visibleMoreDoc = true;
-                      });
-                      return;
-                    }else{
-                      setState(() {
-                        _visibleMoreDoc = false;
-                      });
-                    }
-                    if(_paperName.text == "" || _paperImage == null){
-                      setState(() {
-                        _visibledoc = true;
-                      });
-                    }else{
-                      _visibledoc = false;
-                      setState(() {
-                        listOfObjects.add(MultiImageModel(imageName: _paperName.text,
-                            imageFile: _paperImage!,imageIndex : imageIndex));
-                       /* attachmentName.add(_paperName.text);
+                  child: TextButton(
+                    onPressed: wizardFormBloc.kidHavePaper == 1
+                        ? () {
+                            if (listOfObjects.length >= 2) {
+                              setState(() {
+                                _visibleMoreDoc = true;
+                              });
+                              return;
+                            } else {
+                              setState(() {
+                                _visibleMoreDoc = false;
+                              });
+                            }
+                            if (_paperName.text == "" || _paperImage == null) {
+                              setState(() {
+                                _visibledoc = true;
+                              });
+                            } else {
+                              _visibledoc = false;
+                              setState(() {
+                                listOfObjects.add(MultiImageModel(
+                                    imageName: _paperName.text,
+                                    imageFile: _paperImage!,
+                                    imageIndex: imageIndex));
+                                /* attachmentName.add(_paperName.text);
                         List<int> imageBytes = _paperImage.readAsBytesSync();
                         attachmentDoc.add(base64Encode(imageBytes));
                         wizardFormBloc.attachment = attachmentName;
                         wizardFormBloc.doc = attachmentDoc;*/
-                        wizardFormBloc.listOfDocs = listOfObjects;
-                        imageIndex ++;
-                        _paperName.clear();
-                        _paperImage = null;
-                      });
-                    }
-                  } : null,
+                                wizardFormBloc.listOfDocs = listOfObjects;
+                                imageIndex++;
+                                _paperName.clear();
+                                _paperImage = null;
+                              });
+                            }
+                          }
+                        : null,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("أضف مرفق",style: TextStyle(color: kGreenColor,fontSize: 20,
-                            fontWeight: FontWeight.bold),),
-                        Icon(Icons.add_circle_outline_sharp,color: kGreenColor,size: 25,),
+                        Text(
+                          "أضف مرفق",
+                          style: TextStyle(
+                              color: kGreenColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Icon(
+                          Icons.add_circle_outline_sharp,
+                          color: kGreenColor,
+                          size: 25,
+                        ),
                       ],
                     ),
-
                   ),
                   decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                          color: kGreenColor
-                      )
-                  ),
+                      border: Border.all(color: kGreenColor)),
                 ),
               ],
             ),
@@ -2505,47 +2614,59 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Padding(
             padding: EdgeInsets.only(top: pageHeight * 0.02),
             child: InkWell(
-              onTap: (){
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return Stack(
-                        //alignment: Alignment.center,
-                        children: [
-                          Image.asset("assets/images/iPhone 6, 7, 8 – 47.png",
-                              width: double.infinity,height: pageHeight,
-                              fit: BoxFit.fill),
-                          Transform.translate(
-                            offset: Offset(pageWidth * 0.04, pageHeight * 0.1),
-                            child: RaisedButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.arrow_back_ios,
-                                    size: pageWidth * 0.04,color: Colors.white,),
-                                  Text("تخطى",style: TextStyle(
-                                      fontSize: pageWidth * 0.06,
-                                      color: Colors.white
-                                  ),),
-                                ],
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (BuildContext context) {
+                  return Stack(
+                    //alignment: Alignment.center,
+                    children: [
+                      Image.asset("assets/images/iPhone 6, 7, 8 – 47.png",
+                          width: double.infinity,
+                          height: pageHeight,
+                          fit: BoxFit.fill),
+                      Transform.translate(
+                        offset: Offset(pageWidth * 0.04, pageHeight * 0.1),
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_back_ios,
+                                size: pageWidth * 0.04,
+                                color: Colors.white,
                               ),
-                              color: Colors.transparent,
-                              elevation: 0,
-                            ),
+                              Text(
+                                "تخطى",
+                                style: TextStyle(
+                                    fontSize: pageWidth * 0.06,
+                                    color: Colors.white),
+                              ),
+                            ],
                           ),
-                        ],
-                      );
-                    }
-                ));
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('كيفية إضافة مرفق',style: TextStyle(
-                    color: kGreenColor,
-                    fontSize: 18,
-                  ),),
-                  SizedBox(width: 5,),
-                  Icon(FontAwesomeIcons.questionCircle,color: kGreenColor)
+                  Text(
+                    'كيفية إضافة مرفق',
+                    style: TextStyle(
+                      color: kGreenColor,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Icon(FontAwesomeIcons.questionCircle, color: kGreenColor)
                 ],
               ),
             ),
@@ -2560,22 +2681,33 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     DataColumn(label: Text('')),
                     DataColumn(label: Text('')),
                   ],
-                  rows: listOfObjects.map((e) =>
-                      DataRow(cells: <DataCell>[
-                        DataCell(e.imageFile == null ?
-                        Text('',
-                          style: TextStyle(fontSize: 20),) :
-                        Container(child: Image.file(e.imageFile,),
-                          height: pageHeight * 0.1,width: pageWidth * 0.3,),),
-                        DataCell(Text(e.imageName)),
+                  rows: listOfObjects
+                      .map((e) => DataRow(cells: <DataCell>[
                             DataCell(
-                                IconButton(
-                                  icon: Icon(Icons.delete,size: 20,color: kRedColor,),
-                                  onPressed: () => removePaper(e.imageIndex),
-                                )
-                            )
-                      ]
-                      )).toList() ),
+                              e.imageFile == null
+                                  ? Text(
+                                      '',
+                                      style: TextStyle(fontSize: 20),
+                                    )
+                                  : Container(
+                                      child: Image.file(
+                                        e.imageFile,
+                                      ),
+                                      height: pageHeight * 0.1,
+                                      width: pageWidth * 0.3,
+                                    ),
+                            ),
+                            DataCell(Text(e.imageName)),
+                            DataCell(IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                size: 20,
+                                color: kRedColor,
+                              ),
+                              onPressed: () => removePaper(e.imageIndex),
+                            ))
+                          ]))
+                      .toList()),
             ),
           ),
         ],
@@ -2583,7 +2715,8 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
     );
   }
 
-  FormBlocStep _confirmation(WizardFormBloc wizardFormBloc, var pageWidth, var pageHeight){
+  FormBlocStep _confirmation(
+      WizardFormBloc wizardFormBloc, var pageWidth, var pageHeight) {
     return FormBlocStep(
       title: Text(''),
       content: Column(
@@ -2615,19 +2748,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "اسم المبلغ", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "اسم المبلغ",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.reporterName.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2636,19 +2770,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "الرقم القومى", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "الرقم القومى",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.nationalId.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2657,19 +2792,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "رقم التليفون", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "رقم التليفون",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.mobile.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2690,19 +2826,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "المحافظة", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "المحافظة",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    wizardFormBloc.goversName == null ? '' : wizardFormBloc.goversName! ,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.goversName == null
+                        ? ''
+                        : wizardFormBloc.goversName!,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2711,19 +2850,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "المركز", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "المركز",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    wizardFormBloc.districtsName == null ? '' : wizardFormBloc.districtsName!,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.districtsName == null
+                        ? ''
+                        : wizardFormBloc.districtsName!,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2732,15 +2874,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "عنوان المبلغ",
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
                     width: pageWidth * 0.04,
@@ -2752,16 +2892,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    wizardFormBloc.address.value ,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.address.value,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2770,19 +2907,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "اسم الطفل", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "اسم الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.kidName.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2791,14 +2929,14 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "مصدر المعرفة باسم الطفل", style: TextStyle(fontSize: 18),),
+                    "مصدر المعرفة باسم الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
@@ -2806,16 +2944,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     selectedNameSource == null ? '' : selectedNameSource!.name,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2825,14 +2960,14 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             textDirection: TextDirection.rtl,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: pageHeight * 0.02,
-                  bottom: pageHeight * 0.02),
+                  top: pageHeight * 0.02, bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "صورة الطفل", style: TextStyle(fontSize: 18),),
+                    "صورة الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
@@ -2843,34 +2978,35 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             children: [
               _kidImage == null
                   ? Text(
-                '',
-                style: TextStyle(fontSize: 20),
-              )
+                      '',
+                      style: TextStyle(fontSize: 20),
+                    )
                   : Container(
-                child: Image.file(
-                  _kidImage!,
-                ),
-                height: pageHeight * 0.1,
-                width: pageWidth * 0.4,
-              ),
+                      child: Image.file(
+                        _kidImage!,
+                      ),
+                      height: pageHeight * 0.1,
+                      width: pageWidth * 0.4,
+                    ),
             ],
           ),
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "نوع الطفل", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "نوع الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.gender,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2879,26 +3015,57 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "الحالة الصحية للطفل", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
-                  ...List.generate(wizardFormBloc.healthStatName.length, (index) =>
-                      Column(
-                        children: [
-                          Text(
-                            wizardFormBloc.healthStatName[index].toString(),
-                            style: TextStyle(
-                                fontSize: 18),
-                          ),
-                        ],
-                      ),)
-
+                    "الحالة الصحية للطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
+                  ...List.generate(
+                    wizardFormBloc.healthStatName.length,
+                    (index) => Column(
+                      children: [
+                        Text(
+                          wizardFormBloc.healthStatName[index].toString(),
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Padding(
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "نوع الاعاقة",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
+                  ...List.generate(
+                    wizardFormBloc.disabilityName.length,
+                    (index) => Column(
+                      children: [
+                        Text(
+                          wizardFormBloc.disabilityName[index],
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
@@ -2907,45 +3074,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             textDirection: TextDirection.rtl,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+                  top: pageHeight * 0.02, bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "نوع الاعاقة", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
-                  ...List.generate(wizardFormBloc.disabilityName.length, (index) =>
-                      Column(
-                        children: [
-                          Text(
-                            wizardFormBloc.disabilityName[index],
-                            style: TextStyle(
-                                fontSize: 18),
-                          ),
-                        ],
-                      ),)
-                ],
-              ),
-            ),
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02,
-                  bottom: pageHeight * 0.02),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "عمر الطفل", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "عمر الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc.kidAge.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -2966,14 +3108,14 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "طريقة التعرف على الطفل", style: TextStyle(fontSize: 18),),
+                    "طريقة التعرف على الطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
@@ -2981,17 +3123,15 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    selectedRecognition == null ? '' :
-                    selectedRecognition!.name,
-                    style: TextStyle(
-                        fontSize: 18),
+                    selectedRecognition == null
+                        ? ''
+                        : selectedRecognition!.name,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3012,19 +3152,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "المحافظة", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "المحافظة",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    selectedSecondState == null ? '' : selectedSecondState!.goverName ,
-                    style: TextStyle(
-                        fontSize: 18),
+                    selectedSecondState == null
+                        ? ''
+                        : selectedSecondState!.goverName,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3033,19 +3176,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "المركز", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "المركز",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    selectedSecondCity == null ? '' : selectedSecondCity!.districtName,
-                    style: TextStyle(
-                        fontSize: 18),
+                    selectedSecondCity == null
+                        ? ''
+                        : selectedSecondCity!.districtName,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3054,15 +3200,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "عنوان العثور على الطفل",
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
                     width: pageWidth * 0.04,
@@ -3074,16 +3218,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    wizardFormBloc.foundAddress.value ,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.foundAddress.value,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3104,39 +3245,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "المحافظة", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
-                  Text(
-                    selectedThirdState == null ? '' : selectedThirdState!.goverName ,
-                    style: TextStyle(
-                        fontSize: 18),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "المركز", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "المحافظة",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    selectedThirdCity == null ? '' : selectedThirdCity!.districtName,
-                    style: TextStyle(
-                        fontSize: 18),
+                    selectedThirdState == null
+                        ? ''
+                        : selectedThirdState!.goverName,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3145,15 +3269,37 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "المركز",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
+                  Text(
+                    selectedThirdCity == null
+                        ? ''
+                        : selectedThirdCity!.districtName,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Padding(
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "عنوان تواجد الطفل حاليا",
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
                     width: pageWidth * 0.04,
@@ -3165,16 +3311,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    wizardFormBloc.whereAddressNow.value ,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.whereAddressNow.value,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3185,12 +3328,16 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             children: [
               Text(
                 'هل هناك معرفة بالقائمين على إيواء الطفل حاليا',
-                style: TextStyle(color: kTextColor,fontSize: pageWidth * 0.045),
+                style:
+                    TextStyle(color: kTextColor, fontSize: pageWidth * 0.045),
               ),
-              SizedBox(width: pageWidth * 0.04,),
+              SizedBox(
+                width: pageWidth * 0.04,
+              ),
               Text(
                 wizardFormBloc.knowKidSaver == 1 ? 'نعم' : 'لا',
-                style: TextStyle(color: kTextColor,fontSize: pageWidth * 0.045),
+                style:
+                    TextStyle(color: kTextColor, fontSize: pageWidth * 0.045),
               ),
             ],
           ),
@@ -3209,31 +3356,13 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "مواصفات ملابس الطفل وعلامات مميزة له", style: TextStyle(fontSize: 18),),
-                ],
-              ),
-            ),
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
-                children: [
-                  Text(
-                    wizardFormBloc.clothesDescription.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    "مواصفات ملابس الطفل وعلامات مميزة له",
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3242,14 +3371,14 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "ملابسات خاصة بفقد الطفل او العثور عليه", style: TextStyle(fontSize: 18),),
+                    wizardFormBloc.clothesDescription.value,
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
@@ -3257,16 +3386,28 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "ملابسات خاصة بفقد الطفل او العثور عليه",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Padding(
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     wizardFormBloc.circumstances.value,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3288,19 +3429,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             textDirection: TextDirection.rtl,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: pageHeight * 0.02,
-                  bottom: pageHeight * 0.02),
+                  top: pageHeight * 0.02, bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "هل تم عمل محضر فقد للطفل", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "هل تم عمل محضر فقد للطفل",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
                     wizardFormBloc._isRecordBeforeText,
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3309,19 +3451,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: pageHeight * 0.02),
+              padding: EdgeInsets.only(bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "رقم المحضر", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "رقم المحضر",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    wizardFormBloc.noRecordLost == null ? '' : wizardFormBloc.noRecordLost!,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.noRecordLost == null
+                        ? ''
+                        : wizardFormBloc.noRecordLost!,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3330,19 +3475,22 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: pageHeight * 0.02),
+              padding: EdgeInsets.only(bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "قسم الشرطة", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "قسم الشرطة",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    wizardFormBloc.policeStation == null ? '' : wizardFormBloc.policeStation!,
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.policeStation == null
+                        ? ''
+                        : wizardFormBloc.policeStation!,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3351,14 +3499,14 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: pageHeight * 0.02),
+              padding: EdgeInsets.only(bottom: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "صورة المحضر", style: TextStyle(fontSize: 18),),
+                    "صورة المحضر",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
@@ -3368,35 +3516,37 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
             children: [
               _recordImage == null
                   ? Text(
-                '',
-                style: TextStyle(fontSize: 20),
-              )
+                      '',
+                      style: TextStyle(fontSize: 20),
+                    )
                   : Container(
-                child: Image.file(
-                  _recordImage!,
-                ),
-                height: pageHeight * 0.1,
-                width: pageWidth * 0.4,
-              ),
+                      child: Image.file(
+                        _recordImage!,
+                      ),
+                      height: pageHeight * 0.1,
+                      width: pageWidth * 0.4,
+                    ),
             ],
           ),
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageHeight * 0.02),
+              padding: EdgeInsets.only(top: pageHeight * 0.02),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "تاريخه", style: TextStyle(fontSize: 18),),
-                  SizedBox(width: pageWidth * 0.04,),
+                    "تاريخه",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: pageWidth * 0.04,
+                  ),
                   Text(
-                    wizardFormBloc.recordDate == null ? '' :
-                    dateFormat(wizardFormBloc.recordDate!),
-                    style: TextStyle(
-                        fontSize: 18),
+                    wizardFormBloc.recordDate == null
+                        ? ''
+                        : dateFormat(wizardFormBloc.recordDate!),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3405,22 +3555,20 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: pageWidth * 0.02),
+              padding: EdgeInsets.only(top: pageWidth * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "هل لديك مرفقات تساهم في توثيق الانتهاك",
-                    style: TextStyle(
-                        fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
                     width: pageWidth * 0.04,
                   ),
-                  Text(wizardFormBloc.kidHavePaper == 1 ? 'نعم' : 'لا',
-                    style: TextStyle(
-                        fontSize: 18),
+                  Text(
+                    wizardFormBloc.kidHavePaper == 1 ? 'نعم' : 'لا',
+                    style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
@@ -3435,33 +3583,40 @@ class _FoundedKidPageState extends State<FoundedKidPage> {
                     DataColumn(label: Text('')),
                     DataColumn(label: Text('')),
                   ],
-                  rows: listOfObjects.map((e) =>
-                      DataRow(cells: <DataCell>[
-                        DataCell(e.imageFile == null ?
-                        Text('',
-                          style: TextStyle(fontSize: 20),) :
-                        Container(child: Image.file(e.imageFile,),
-                          height: pageHeight * 0.1,width: pageWidth * 0.3,),),
-                        DataCell(Text(e.imageName)),
-
-                      ]
-                      )).toList() ),
+                  rows: listOfObjects
+                      .map((e) => DataRow(cells: <DataCell>[
+                            DataCell(
+                              e.imageFile == null
+                                  ? Text(
+                                      '',
+                                      style: TextStyle(fontSize: 20),
+                                    )
+                                  : Container(
+                                      child: Image.file(
+                                        e.imageFile,
+                                      ),
+                                      height: pageHeight * 0.1,
+                                      width: pageWidth * 0.3,
+                                    ),
+                            ),
+                            DataCell(Text(e.imageName)),
+                          ]))
+                      .toList()),
             ),
           ),
         ],
       ),
     );
   }
-
-  }
+}
 
 class LoadingDialog extends StatelessWidget {
   static void show(BuildContext context, {Key? key}) => showDialog<void>(
-    context: context,
-    useRootNavigator: false,
-    barrierDismissible: false,
-    builder: (_) => LoadingDialog(key: key),
-  ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
+        context: context,
+        useRootNavigator: false,
+        barrierDismissible: false,
+        builder: (_) => LoadingDialog(key: key),
+      ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
 
   static void hide(BuildContext context) => Navigator.pop(context);
 
@@ -3484,4 +3639,3 @@ class LoadingDialog extends StatelessWidget {
     );
   }
 }
-
